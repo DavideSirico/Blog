@@ -1,55 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<blog>
-    <post>
-        <category>Education</category>
-        <tags>
-            <tag>Education</tag>
-            <tag>Learning</tag>
-            <tag>Science</tag>
-        </tags>
-        <title>Prova</title>
-        <content>adjlhflakjbdsfslhdbfsadjkhfbaskjfhbsafjkhasbfashjdbfsdafjhsbfskjhbgdjkfhbgdfhjgbdfjhkdbfjhdfbvd</content>
-        <comments>
-            <comment>
-                <author>Davide Sirico</author>
-                <email>davide.sirico@gmail.com</email>
-                <content>Bello!</content>
-                <date>2024-02-24</date>
-            </comment>
-            <comment>
-                <author>Troll</author>
-                <email>minecraftantonio748@gmail.com</email>
-                <content>Brutto?</content>
-                <date>2024-02-25</date>
-            </comment>
-        </comments>
-        <views>1230423</views>
-        <date>2024-02-24</date>
-    </post>
-    <post>
-        <category>Education</category>
-        <tags>
-            <tag>Education</tag>
-            <tag>Learning</tag>
-            <tag>Science</tag>
-        </tags>
-        <title>Prova2</title>
-        <content>skldfjhbsalkdhfbasdljfhbasdkjfhbsakjdfhbsadkjfh</content>
-        <comments>
-            <comment>
-                <author>Davide Sirico</author>
-                <email>davide.sirico@gmail.com</email>
-                <content>Bello!</content>
-                <date>2024-02-24</date>
-            </comment>
-            <comment>
-                <author>Troll</author>
-                <email>minecraftantonio748@gmail.com</email>
-                <content>Brutto?</content>
-                <date>2024-02-25</date>
-            </comment>
-        </comments>
-        <views>1230423</views>
-        <date>2024-02-24</date>
-    </post>
-</blog>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><blog><post id="0"><title>a</title><content>a&#13;
+a&#13;
+a&#13;
+a&#13;
+aa&#13;
+a</content><category>a</category><views>0</views><date>2024-02-29</date></post><post id="1"><title>b</title><content>b&#13;
+b&#13;
+b&#13;
+b&#13;
+b&#13;
+b</content><category>b</category><views>0</views><date>2024-02-29</date></post></blog>

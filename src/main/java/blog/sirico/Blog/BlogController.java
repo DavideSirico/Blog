@@ -19,7 +19,6 @@ public class BlogController {
 	}
 
 	@GetMapping("/")
-	// use index.html template
 	public String index(Model model) {
 		model.addAttribute("posts", posts);
 		return "index";
@@ -36,10 +35,10 @@ public class BlogController {
 	}
 	@GetMapping("/not-found")
 	public String notFound(Model model) {
-
 		return "not-found";
 	}
 
+	// form to create a new post
 	@GetMapping("/new-post")
 	public String newPost(Model model) {
 		return "new-post";
@@ -47,12 +46,24 @@ public class BlogController {
 
 	@PostMapping("/new-post")
 	public String newPost(@RequestParam String title, @RequestParam String content, @RequestParam String category, @RequestParam String tags, Model model) {
-		Post post = new Post("0", title, content, category, new ArrayList<String>(), new ArrayList<Comment>(), 0, LocalDate.now());
+		// get last post id
+		String id = Integer.toString(posts.getPosts().size());
+		Post post = new Post(id, title, content, category, new ArrayList<String>(), new ArrayList<Comment>(), 0, LocalDate.now());
 		posts.addPost(post);
+		// redirect to the home page
 		return "redirect:/";
 	}
 	
-	// @GetMapping("/post/{id}/add-comment")
+	@PostMapping("/post/{id}/add-comment")
+	public String addComment(@PathVariable String id, Model model) {
+		Post post = posts.getPost(id);
+		if(post == null) {
+			return "redirect:/not-found";
+		}
+		model.addAttribute("post", post);
+		return "add-comment";
+	}
 
+	
 
 }
