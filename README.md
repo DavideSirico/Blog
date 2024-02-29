@@ -22,4 +22,20 @@ che avrà come figli i contenuti dell’elemento richiesto.
 che dovrà comunque rispettare la struttura e le eventuali restrizioni dettate dallo
 schema. Il server dovrà poi salvare il documento modificato.
 
-Portale di Notizie o Blog: Gestione di articoli, categorie, tag e commenti.
+Blog: Gestione di articoli, categorie, tag e commenti.
+
+
+
+TODO:
+- [ ] Creare un file XML con almeno 3 livelli oltre l'elemento radice
+- [ ] Creare un file XSD che valida il file XML
+- [ ] Implementare la richiesta di visualizzazione di un tipo di elemento del file XML
+- [ ] Aggiungere login
+- [ ] Modifica dei post
+- [ ] CSS
+- [ ] Rimozione dei post
+- [ ] Aggiunta di categorie e tag
+- [ ] Aggiunta di commenti
+- [ ] Aggiunta di immagini
+- [ ] Ricerca dei post
+- [ ] Paginazione

@@ -14,8 +14,7 @@ public class BlogController {
 	private Posts posts;
 
 	public BlogController() {
-		posts = new Posts();
-		posts.parseXML("src/main/resources/xml/posts.xml");
+		posts = new Posts("src/main/resources/xml/posts.xml");
 	}
 
 	@GetMapping("/")
@@ -30,9 +29,11 @@ public class BlogController {
 		if(post == null) {
 			return "redirect:/not-found";
 		}
+		posts.addView(id);
 		model.addAttribute("post", post);
 		return "post";
 	}
+
 	@GetMapping("/not-found")
 	public String notFound(Model model) {
 		return "not-found";
@@ -55,13 +56,15 @@ public class BlogController {
 	}
 	
 	@PostMapping("/post/{id}/add-comment")
-	public String addComment(@PathVariable String id, Model model) {
+	public String addComment(@PathVariable String id, @RequestParam String content, @RequestParam String Author, @RequestParam String email, Model model) {
 		Post post = posts.getPost(id);
 		if(post == null) {
 			return "redirect:/not-found";
 		}
+		Comment comment = new Comment(content, Author, email, LocalDate.now());
+		posts.addComment(id, comment);
 		model.addAttribute("post", post);
-		return "add-comment";
+		return "redirect:/post/" + id;
 	}
 
 	
