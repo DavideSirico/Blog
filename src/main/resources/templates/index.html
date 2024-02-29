@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Homepage</title>
+</head>
+<body>
+    <h1>Homepage!</h1>
+    <p>Lista di post:</p>
+    <ul>
+        <li th:each="post : ${posts}">
+            <a th:href="@{'/post/' + ${post.getId()}}" th:text="${post.getTitle()}"></a>
+        </li>
+    </ul>
+
+    <a href="/new-post">Create a new Post</a>
+    
+
+</body>
+</html>

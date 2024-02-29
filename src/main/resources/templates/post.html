@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>POST</title>
+</head>
+<body>
+    <!-- title -->
+    <h1 th:text="${post.getTitle()}"></h1>
+    <p th:text="${post.getContent()}"></p>
+
+    <!-- comments -->
+    <h2>Comments</h2>
+    <ul>
+        <li th:each="comment : ${post.getComments()}" th:if="${comment != null}">
+            <p th:text="${comment.getContent()}"></p>
+        </li>
+    </ul>
+
+    <!-- new comment form -->
+    <!-- action /post/${id}/add-comment -->
+    <form action="/post/${post.getId()}/add-comment" method="post">
+        <label for="text">Comment</label>
+        <input type="text" id="text" name="text">
+        <button type="submit">Comment</button>
+    </form>
+</body>
+</html>
