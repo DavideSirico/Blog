@@ -36,6 +36,13 @@ TODO:
 - [ ] Rimozione dei post
 - [ ] Aggiunta di categorie e tag
 - [ ] Aggiunta di commenti
-- [ ] Aggiunta di immagini
 - [ ] Ricerca dei post
 - [ ] Paginazione
+
+
+TODO (index):
+- [X] avatar con dropdown menu (sign out, manage posts)
+- [ ] sign out
+- [ ] manage posts
+- [ ] search bar
+- [ ] pagination
