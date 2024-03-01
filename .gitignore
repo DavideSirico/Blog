@@ -1,4 +1,5 @@
 .DS_Store
 # .class files
 *.class
-./node_modules
+# node_modules
+node_modules
