@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 import java.time.*;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class BlogController {
@@ -20,6 +22,11 @@ public class BlogController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("posts", posts);
+		for(Post post : posts.getPosts()){
+			for(String tag : post.getTags()){
+				System.out.println(tag);
+			}
+		}
 		return "index";
 	}
 
@@ -49,7 +56,8 @@ public class BlogController {
 	public String newPost(@RequestParam String title, @RequestParam String content, @RequestParam String category, @RequestParam String tags, Model model) {
 		// get last post id
 		String id = Integer.toString(posts.getPosts().size());
-		Post post = new Post(id, title, content, category, new ArrayList<String>(), new ArrayList<Comment>(), 0, LocalDate.now());
+		ArrayList<String> tagsList = new ArrayList<String>(Arrays.asList(tags.split(",")));
+		Post post = new Post(id, title, content, category, tagsList, new ArrayList<Comment>(), 0, LocalDate.now());
 		posts.addPost(post);
 		// redirect to the home page
 		return "redirect:/";
@@ -66,6 +74,12 @@ public class BlogController {
 		model.addAttribute("post", post);
 		return "redirect:/post/" + id;
 	}
+
+	@GetMapping("/login")
+	public String getMethodName(Model model) {
+		return "login";
+	}
+	
 
 	
 
