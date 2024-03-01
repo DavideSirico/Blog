@@ -79,4 +79,9 @@ public class Post {
         return this.date;
     }
 
+    public String getDescription(){
+        return this.content.substring(0, Math.min(this.content.length(), 100));
+    }
+
+
 }
