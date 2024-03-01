@@ -1,41 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create a new post</title>
-  <style>
-
-.tags-input-wrapper{
-    background: transparent;
-    padding: 10px;
-    border-radius: 4px;
-    max-width: 400px;
-    border: 1px solid #ccc
-}
-.tags-input-wrapper input{
-    border: none;
-    background: transparent;
-    outline: none;
-    width: 140px;
-    margin-left: 8px;
-}
-.tags-input-wrapper .tag{
-    display: inline-block;
-    background-color: #fa0e7e;
-    color: white;
-    border-radius: 40px;
-    padding: 0px 3px 0px 7px;
-    margin-right: 5px;
-    margin-bottom:5px;
-    box-shadow: 0 5px 15px -2px rgba(250 , 14 , 126 , .7)
-}
-.tags-input-wrapper .tag a {
-    margin: 0 7px 3px;
-    display: inline-block;
-    cursor: pointer;
-}
-  </style>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
   <h1>Create a new post</h1>
@@ -232,7 +201,6 @@ var tagInput1 = new TagsInput({
         duplicate : false,
         max : 10
     });
-    tagInput1.addData(['PHP' , 'JavaScript' , 'CSS'])
 
   </script>
 </body>
