@@ -29,6 +29,16 @@ public class BlogController {
 		}
 		return "index";
 	}
+	@GetMapping("/index-old")
+	public String indexOld(Model model) {
+		model.addAttribute("posts", posts);
+		for(Post post : posts.getPosts()){
+			for(String tag : post.getTags()){
+				System.out.println(tag);
+			}
+		}
+		return "index.old";
+	}
 
 	@GetMapping("/post/{id}")
 	public String post(@PathVariable String id, Model model) {

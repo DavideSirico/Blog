@@ -3,117 +3,84 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog Homepage</title>
-  <link rel="stylesheet" href="/src/main/resources/css/output.css" th:href="@{/css/output.css}">
   <link rel="stylesheet" th:href="@{/css/style.css}">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 
 <body>
-  <div class="bg-white py-24 sm:py-32">
-    <!-- Title + search + login -->
-    <div class="mx-auto max-w-8xl px-4 flex flex-col">
-      <div class="flex flex-row">
-        <div class="mx-auto max-w-4xl lg:mx-0 ">
-          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Sirico's Blog</h2>
-          <p class="mt-2 text-lg leading-8 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing
-            elit. Quia iusto ducimus impedit eius laborum? Iure, similique quasi molestias nam fuga sunt natus
-            debitis deserunt. Fugiat porro aperiam deserunt maxime vitae..</p>
-        </div>
-
-        <div class="mr-2 p-2">
-          <div class="relative">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-              </svg>
-              <span class="sr-only">Search icon</span>
-            </div>
-            <form>
-              <input type="text" id="search-navbar"
-                class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search...">
-            </form>
-          </div>
-        </div>
-        <div class="p-2">
-          <!-- if the user is logged -->
-          <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
-            class="flex text-sm bg-gray-800 rounded-full" type="button">
-            <span class="sr-only">Open user menu</span>
-            <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-              <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
-                </path>
-              </svg>
-            </div>
-          </button>
-          <!-- Dropdown menu -->
-          <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-            <ul class="py-2 text-sm" aria-labelledby="dropdownUserAvatarButton">
-              <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Create new post</a>
-              </li>
-            </ul>
-            <div class="py-2">
-              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Sign out</a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <!-- if the user is not logged -->
-        <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-          <ul class="py-2 text-sm" aria-labelledby="dropdownUserAvatarButton">
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Login</a>
-            </li>
-          </ul>
-        </div>
+  <div class="container-title flex space-between">
+    <div>
+      <h1 class="blog-title">Sirico's Blog</h1>
+    </div>
+    <div class="flex align-center">
+      <div class="flex-right px-2">
+        <svg fill="#000000" height="32px" width="32px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 488.4 488.4" xml:space="preserve">
+          <g>
+            <g>
+              <path d="M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6
+			s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2
+			S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7
+			S381.9,104.65,381.9,203.25z" />
+            </g>
+          </g>
+        </svg>
       </div>
-
+      <div class="flex-right px-2">
+        <svg fill="#000000" width="32x" height="32px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .cls-1 {
+                fill: none;
+              }
+            </style>
+          </defs>
+          <path id="_inner-path_" data-name="&lt;inner-path&gt;" class="cls-1"
+            d="M8.0071,24.93A4.9958,4.9958,0,0,1,13,20h6a4.9959,4.9959,0,0,1,4.9929,4.93,11.94,11.94,0,0,1-15.9858,0ZM20.5,12.5A4.5,4.5,0,1,1,16,8,4.5,4.5,0,0,1,20.5,12.5Z" />
+          <path
+            d="M26.7489,24.93A13.9893,13.9893,0,1,0,2,16a13.899,13.899,0,0,0,3.2511,8.93l-.02.0166c.07.0845.15.1567.2222.2392.09.1036.1864.2.28.3008.28.3033.5674.5952.87.87.0915.0831.1864.1612.28.2417.32.2759.6484.5372.99.7813.0441.0312.0832.0693.1276.1006v-.0127a13.9011,13.9011,0,0,0,16,0V27.48c.0444-.0313.0835-.0694.1276-.1006.3412-.2441.67-.5054.99-.7813.0936-.08.1885-.1586.28-.2417.3025-.2749.59-.5668.87-.87.0933-.1006.1894-.1972.28-.3008.0719-.0825.1522-.1547.2222-.2392ZM16,8a4.5,4.5,0,1,1-4.5,4.5A4.5,4.5,0,0,1,16,8ZM8.0071,24.93A4.9957,4.9957,0,0,1,13,20h6a4.9958,4.9958,0,0,1,4.9929,4.93,11.94,11.94,0,0,1-15.9858,0Z" />
+          <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32"
+            height="32" />
+        </svg>
+      </div>
     </div>
-    <!-- posts -->
-    <div
-      class="mx-auto max-w-8xl grid grid-cols-3 mt-10 border-t border-gray-200 pt-10">
-      <article th:each="post : ${posts}" class="flex flex-col items-start justify-between">
-        <div class="flex items-center gap-x-4 text-xs">
-          <div>
-            <time th:text="${post.getDate()}" datetime="2020-03-16" class="text-gray-500"></time>
-          </div>
-          <div>
-            <!-- for each tag in the post -->
-            <div th:each="tag : ${post.getTags()}">
-              <!-- TODO: add tag filter -->
-              <a th:text="${tag}"
-                class="relative z-10 rounded-full bg-gray-50 px-1.5 py-0.75 font-small text-gray-600 hover:bg-gray-100"></a>
-            </div>
-          </div>
 
-        </div>
-        <div class="group relative">
-          <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-            <a th:href="@{'/post/' + ${post.getId()}}">
-              <span class="absolute inset-0"></span>
-              <span th:text="${post.getTitle()}"></span>
-            </a>
-          </h3>
-          <p th:text="${post.getDescription()}" class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
-          </p>
-        </div>
-      </article>
-    </div>
   </div>
 
-
-
-  <a href="/new-post">Create a new Post</a>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+  <div class="container-grid border-top border-grey">
+    <article>
+      <div class="flex space-between">
+      <h3 class="date">
+        <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        01-03-2024
+      </h3>
+      <h3 class="views">
+        <svg width="12px" height="12px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="#000000" d="M512 160c320 0 512 352 512 352S832 864 512 864 0 512 0 512s192-352 512-352zm0 64c-225.28 0-384.128 208.064-436.8 288 52.608 79.872 211.456 288 436.8 288 225.28 0 384.128-208.064 436.8-288-52.608-79.872-211.456-288-436.8-288zm0 64a224 224 0 1 1 0 448 224 224 0 0 1 0-448zm0 64a160.192 160.192 0 0 0-160 160c0 88.192 71.744 160 160 160s160-71.808 160-160-71.744-160-160-160z"/></svg>
+        100
+      </h3>
+    </div>
+      <h2 class="title">TITOLO</h2>
+      <p class="description">paragrafo</p>
+    </article>
+    <article>
+      <h3 class="date">01-03-2024</h3>
+      <h2 class="title">TITOLO</h2>
+      <p class="description">paragrafo</p>
+    </article>
+    <article>
+      <h3 class="date">01-03-2024</h3>
+      <h2 class="title">TITOLO</h2>
+      <p class="description">paragrafo</p>
+    </article>
+    <article>
+      <h3 class="date">01-03-2024</h3>
+      <h2 class="title">TITOLO</h2>
+      <p class="description">paragrafo</p>
+    </article>
+  </div>
 </body>
 
 </html>
