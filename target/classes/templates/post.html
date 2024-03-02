@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>POST</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <!-- title -->
-
-    <h1 th:text="'Titolo: ' + ${post.getTitle()}"></h1>
+    <h1 class="blog-title" th:text="'Titolo: ' + ${post.getTitle()}"></h1>
 
     <!-- date -->
     <p th:text="'Data:' + ${post.getDate()}">data: </p>
@@ -26,6 +26,7 @@
             <p th:text="${comment.getContent()}"></p>
         </li>
     </ul>
+    
     <!-- if there isn-t any comment -->
     <p th:if="${post.getComments().size() == 0}">No comments yet</p>
 

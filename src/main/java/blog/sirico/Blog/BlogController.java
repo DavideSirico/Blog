@@ -22,6 +22,7 @@ public class BlogController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("posts", posts);
+		model.addAttribute("logged", true);
 		for(Post post : posts.getPosts()){
 			for(String tag : post.getTags()){
 				System.out.println(tag);
