@@ -11,7 +11,9 @@
 <body>
   <div class="container-title flex space-between align-center">
     <div>
-      <a href=""><h1 class="blog-title">Sirico's Blog</h1></a>
+      <a href="">
+        <h1 class="blog-title">Sirico's Blog</h1>
+      </a>
     </div>
     <div class="flex align-center">
       <div class="flex-right px-2">
@@ -92,26 +94,26 @@
           </a>
         </div>
       </div>
-        <div class="flex space-between">
-          <h3 class="date">
-            <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z"
-                stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            </svg>
-            <span th:text="${post.getDate()}">DATA</span>
-          </h3>
-          <h3 class="views">
-            <svg width="12px" height="12px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-              <path fill="#000000"
-                d="M512 160c320 0 512 352 512 352S832 864 512 864 0 512 0 512s192-352 512-352zm0 64c-225.28 0-384.128 208.064-436.8 288 52.608 79.872 211.456 288 436.8 288 225.28 0 384.128-208.064 436.8-288-52.608-79.872-211.456-288-436.8-288zm0 64a224 224 0 1 1 0 448 224 224 0 0 1 0-448zm0 64a160.192 160.192 0 0 0-160 160c0 88.192 71.744 160 160 160s160-71.808 160-160-71.744-160-160-160z" />
-            </svg>
-            <span th:text="${post.getViews()}">NUMERO VIEWS</span>
-          </h3>
-        </div>
-        <h2 class="title" th:text="${post.getTitle()}">TITOLO</h2>
-        <p class="description" th:text="${post.getDescription()}">PARAGRAFO</p>
-        <a th:href="@{'/post/' + ${post.getId()}}" class="read">Read the post</a>
+      <div class="flex space-between">
+        <h3 class="date">
+          <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z"
+              stroke="#000000" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <span th:text="${post.getDate()}">DATA</span>
+        </h3>
+        <h3 class="views">
+          <svg width="12px" height="12px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#000000"
+              d="M512 160c320 0 512 352 512 352S832 864 512 864 0 512 0 512s192-352 512-352zm0 64c-225.28 0-384.128 208.064-436.8 288 52.608 79.872 211.456 288 436.8 288 225.28 0 384.128-208.064 436.8-288-52.608-79.872-211.456-288-436.8-288zm0 64a224 224 0 1 1 0 448 224 224 0 0 1 0-448zm0 64a160.192 160.192 0 0 0-160 160c0 88.192 71.744 160 160 160s160-71.808 160-160-71.744-160-160-160z" />
+          </svg>
+          <span th:text="${post.getViews()}">NUMERO VIEWS</span>
+        </h3>
+      </div>
+      <h2 class="title" th:text="${post.getTitle()}">TITOLO</h2>
+      <p class="description" th:text="${post.getDescription()}">PARAGRAFO</p>
+      <a th:href="@{'/post/' + ${post.getId()}}" class="read">Read the post</a>
     </article>
   </div>
   <script>
