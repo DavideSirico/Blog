@@ -30,19 +30,16 @@ TODO:
 - [ ] Creare un file XML con almeno 3 livelli oltre l'elemento radice
 - [ ] Creare un file XSD che valida il file XML
 - [ ] Implementare la richiesta di visualizzazione di un tipo di elemento del file XML
-- [ ] Aggiungere login
-- [ ] Modifica dei post
+- [X] Aggiungere login
+- [ ] !Modifica dei post
 - [ ] CSS
-- [ ] Rimozione dei post
-- [ ] Aggiunta di categorie e tag
-- [ ] Aggiunta di commenti
+- [X] Rimozione dei post
+- [ ] !Aggiunta di categorie e tag
+- [ ] !Aggiunta di commenti
 - [ ] Ricerca dei post
-- [ ] Paginazione
-
-
-TODO (index):
-- [X] avatar con dropdown menu (sign out, manage posts)
-- [ ] sign out
-- [ ] manage posts
-- [ ] search bar
-- [ ] pagination
+- [X] Paginazione
+- [ ] !Link che portano al post
+- [ ] Pagina per modificare i post
+- [ ] Pagina per aggiungere i post (solo CSS)
+- [ ] Implementare la ricerca
+- [ ] !Link che porta alla home

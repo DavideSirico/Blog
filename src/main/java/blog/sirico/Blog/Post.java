@@ -80,7 +80,7 @@ public class Post {
     }
 
     public String getDescription(){
-        return this.content.substring(0, Math.min(this.content.length(), 100));
+        return this.content.substring(0, Math.min(this.content.length(), 150));
     }
 
 

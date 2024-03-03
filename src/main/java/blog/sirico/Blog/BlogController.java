@@ -8,21 +8,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.*;
 import java.time.*;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
 public class BlogController {
 
 	private Posts posts;
+	private User user;
+	private boolean logged = false;
 
 	public BlogController() {
+		user = new User("admin", "admin");
 		posts = new Posts("src/main/resources/xml/posts.xml");
 	}
 
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("posts", posts);
-		model.addAttribute("logged", true);
+		model.addAttribute("logged", logged);
 		for(Post post : posts.getPosts()){
 			for(String tag : post.getTags()){
 				System.out.println(tag);
@@ -87,11 +93,42 @@ public class BlogController {
 	}
 
 	@GetMapping("/login")
-	public String getMethodName(Model model) {
+	public String getMethodName(@RequestParam(defaultValue = "") String error, Model model) {
+		model.addAttribute("errorMessage", error);
 		return "login";
 	}
-	
 
-	
+	@PostMapping("/login") 
+	public String login(@RequestParam String username, @RequestParam String password, Model model) {
+		System.out.println(username);
+		System.out.println(password);
+		if(user.getUsername().equals(username) && user.checkPassword(password)) {
+			logged = true;
+			return "redirect:/";
+		}
+		return "redirect:/login?error=username o password sbagliato";
+	}
+
+	@GetMapping("/logout")
+	public String logout() {
+		logged = false;
+		return "redirect:/";
+	}
+
+	@PostMapping("/remove")
+	public String postMethodName(@RequestParam String id) {
+		posts.removePost(id);
+		return "redirect:/";
+	}
+
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable String id, Model model) {
+		Post post = posts.getPost(id);
+		if(post == null) {
+			return "redirect:/not-found";
+		}
+		model.addAttribute("post", post);
+		return "edit";
+	}
 
 }

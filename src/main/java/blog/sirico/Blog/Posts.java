@@ -52,4 +52,13 @@ public class Posts implements Iterable<Post> {
         return posts.iterator();
     }
 
+    public void removePost(String id){
+        Post post = getPost(id);
+        if(post != null){
+            System.out.println("Removing post " + id);
+            posts.remove(post);
+            xml.removePost(id);
+        }
+    }
+
 }

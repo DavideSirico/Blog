@@ -238,6 +238,20 @@ public class XML {
         }
     }
 
+    public void removePost(String id) {
+        try {
+            Element postElement = findPost(id);
+            if (postElement != null) {
+                postElement.getParentNode().removeChild(postElement);
+                write();
+            }
+        } catch (Exception e) {
+            System.out.println("Error removing a post from the post.xml file");
+            e.printStackTrace();
+        }
+    }
+
+
     private Element findPost(String id) {
         NodeList nList = doc.getElementsByTagName("post");
         for (int i = 0; i < nList.getLength(); i++) {

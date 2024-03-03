@@ -77,9 +77,9 @@
 }
 
 .container-grid {
-    gap: 20px;
+    gap: 4%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 30.7%);
     margin-left: auto;
     margin-right: auto;
     width: 75%;
@@ -96,6 +96,9 @@ hr {
 }
 
 article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
@@ -103,6 +106,15 @@ article {
     margin: 10px;
     height: 20vh;
     transition: all 0.3s ease;
+}
+
+.read {
+    margin: auto;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
 
 article:hover {
@@ -121,9 +133,11 @@ article h3 {
 .title {
     padding-top: 10px;
     text-align: center;
+    font-size: 35px;
 }
 
 .description {
+    word-wrap: break-word;
     padding-top: 10px;
     color: rgba(29, 29, 29, 0.748);
 }
@@ -183,6 +197,7 @@ a {
 }
 
 .dropbtn {
+    padding-left: 10px;
     background-color: rgb(255, 255, 255);
     color: white;
     font-size: 16px;
@@ -196,6 +211,8 @@ a {
 }
 
 .dropdown-content {
+    
+    background-color: rgb(255,255,255);
     display: none;
     position: absolute;
     transform: translateX(-35%);
@@ -204,6 +221,33 @@ a {
     border-radius: 10px;
     z-index: 10;
 }
+
+.searchbar {
+    transition: transform 0.5s ease;
+    transform-origin: center right;
+    transform: scale(0,1);
+    background-color: rgb(255,255,255);
+    position: relative;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.searchbar input {
+    border: none;
+    text-decoration: none;
+    float: none;
+    display: block;
+    border-radius: 10px;
+    padding: 12px 16px;
+}
+
+.show-searchbar {
+    transition: transform 0.5s ease;
+    transform: scale(1,1);
+    min-width: 160px;
+}
+
+
 
 /* Links inside the dropdown */
 .dropdown-content a {
@@ -220,6 +264,8 @@ a {
     background-color: #ddd;
 }
 
+
+
 .show {
     display: block;
 }
@@ -228,9 +274,8 @@ a {
 .remove {
     z-index: 1;
     position: relative;
-    top: -20px;
-    float: right;
-    left: 20px;
+    top: -25px;
+    left: -22px;
 }
 
 .remove button {
@@ -243,9 +288,8 @@ a {
 .edit {
     z-index: 1;
     position: relative;
-    top: -20px;
-    float: left;
-    right: 20px;
+    top: -25px;
+    right: -22px;
 }
 
 .edit button {
@@ -254,3 +298,74 @@ a {
     border: none;
     cursor: pointer;
 }
+
+.post-title {
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container-post-title {
+    padding-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.container-info {
+    padding-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.container-info p {
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container-content {
+    margin-top: 30px;
+    padding-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+}
+
+
+.post {
+    width: 55%;
+}
+
+.container-content p {
+    line-height: 1.5em;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container-content p:first-letter {
+    text-transform: uppercase;
+    font-weight: bold;
+    initial-letter: 2 1;
+}
+
+.container-comment h2 {
+    padding-bottom: 20px;
+}
+
+.container-comment {
+    padding-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+}
+
+.container-comment p {
+    padding-bottom: 20px;
+}
+
+.container-comment ul {
+    list-style-type: none;
+}
+
