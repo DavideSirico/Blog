@@ -61,11 +61,10 @@ public class XML {
                     Element commentElement = (Element)commentNodes.item(j);
                     String author = commentElement.getElementsByTagName("author").item(0).getTextContent();
                     String comment = commentElement.getElementsByTagName("content").item(0).getTextContent();
-                    String email = commentElement.getElementsByTagName("email").item(0).getTextContent();
                     String dateStr = commentElement.getElementsByTagName("date").item(0).getTextContent();
                     LocalDate date = LocalDate.parse(dateStr);
                     
-                    comments.add(new Comment(author, comment, email, date));
+                    comments.add(new Comment(author, comment, date));
                 }
 
                 int views = Integer.parseInt(postElement.getElementsByTagName("views").item(0).getTextContent());
@@ -150,10 +149,6 @@ public class XML {
                 Element commentContentElement = doc.createElement("content");
                 commentContentElement.appendChild(doc.createTextNode(comment.getContent()));
                 commentElement.appendChild(commentContentElement);
-                // create an email element
-                Element emailElement = doc.createElement("email");
-                emailElement.appendChild(doc.createTextNode(comment.getEmail()));
-                commentElement.appendChild(emailElement);
                 // create a date element
                 Element dateElement = doc.createElement("date");
                 dateElement.appendChild(doc.createTextNode(comment.getDate().toString()));
@@ -220,10 +215,6 @@ public class XML {
                 Element commentContentElement = doc.createElement("content");
                 commentContentElement.appendChild(doc.createTextNode(comment.getContent()));
                 commentElement.appendChild(commentContentElement);
-                // create an email element
-                Element emailElement = doc.createElement("email");
-                emailElement.appendChild(doc.createTextNode(comment.getEmail()));
-                commentElement.appendChild(emailElement);
                 // create a date element
                 Element dateElement = doc.createElement("date");
                 dateElement.appendChild(doc.createTextNode(comment.getDate().toString()));

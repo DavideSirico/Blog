@@ -23,35 +23,14 @@
           </form>
         </div>
         <button class="dropbtn" onclick="searchbar()">
-          <svg fill="#000000" height="32px" width="32px" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 488.4 488.4" xml:space="preserve">
-            <g>
-              <path d="M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6
-        s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2
-        S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7
-        S381.9,104.65,381.9,203.25z" />
-            </g>
-          </svg>
+          <img th:src="@{/icon/search.svg}" alt="search" />
         </button>
 
       </div>
       <div class="flex-right px-2">
         <div>
           <button onclick="dropDownMenu()" class="dropbtn">
-            <svg fill="#000000" width="34px" height="34px" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <style>
-                  .cls-1 {
-                    fill: none;
-                  }
-                </style>
-              </defs>
-              <path id="_inner-path_" data-name="&lt;inner-path&gt;" class="cls-1"
-                d="M8.0071,24.93A4.9958,4.9958,0,0,1,13,20h6a4.9959,4.9959,0,0,1,4.9929,4.93,11.94,11.94,0,0,1-15.9858,0ZM20.5,12.5A4.5,4.5,0,1,1,16,8,4.5,4.5,0,0,1,20.5,12.5Z" />
-              <path
-                d="M26.7489,24.93A13.9893,13.9893,0,1,0,2,16a13.899,13.899,0,0,0,3.2511,8.93l-.02.0166c.07.0845.15.1567.2222.2392.09.1036.1864.2.28.3008.28.3033.5674.5952.87.87.0915.0831.1864.1612.28.2417.32.2759.6484.5372.99.7813.0441.0312.0832.0693.1276.1006v-.0127a13.9011,13.9011,0,0,0,16,0V27.48c.0444-.0313.0835-.0694.1276-.1006.3412-.2441.67-.5054.99-.7813.0936-.08.1885-.1586.28-.2417.3025-.2749.59-.5668.87-.87.0933-.1006.1894-.1972.28-.3008.0719-.0825.1522-.1547.2222-.2392ZM16,8a4.5,4.5,0,1,1-4.5,4.5A4.5,4.5,0,0,1,16,8ZM8.0071,24.93A4.9957,4.9957,0,0,1,13,20h6a4.9958,4.9958,0,0,1,4.9929,4.93,11.94,11.94,0,0,1-15.9858,0Z" />
-
-            </svg>
+            <img th:src="@{/icon/avatar.svg}" alt="avatar" />
 
           </button>
           <!-- If the user is not logged -->
@@ -76,38 +55,23 @@
           <form th:action="@{/remove}" method="post">
             <input type="hidden" th:value="${post.getId()}" name="id">
             <button id="btn-remove">
-              <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M4.99997 8H6.5M6.5 8V18C6.5 19.1046 7.39543 20 8.5 20H15.5C16.6046 20 17.5 19.1046 17.5 18V8M6.5 8H17.5M17.5 8H19M9 5H15M9.99997 11.5V16.5M14 11.5V16.5"
-                  stroke="#464455" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
+              <img th:src="@{/icon/remove.svg}" alt="remove" />
             </button>
           </form>
         </div>
         <div class="edit" th:if="${logged}">
           <a th:href="@{'/edit/' + ${post.getId()}}">
-            <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4M9.35443 12.4346L15.9429 5.92003C16.4684 5.40046 17.3049 5.3718 17.8647 5.85418C18.4812 6.38542 18.5247 7.32554 17.96 7.91149L11.481 14.6335L9 15L9.35443 12.4346Z"
-                stroke="#464455" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <img th:src="@{/icon/edit.svg}" alt="edit" />
           </a>
         </div>
       </div>
       <div class="flex space-between">
         <h3 class="date">
-          <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z"
-              stroke="#000000" stroke-width="2" stroke-linecap="round" />
-          </svg>
+          <img th:src="@{/icon/calendar.svg}" alt="calendar" />
           <span th:text="${post.getDate()}">DATA</span>
         </h3>
         <h3 class="views">
-          <svg width="12px" height="12px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#000000"
-              d="M512 160c320 0 512 352 512 352S832 864 512 864 0 512 0 512s192-352 512-352zm0 64c-225.28 0-384.128 208.064-436.8 288 52.608 79.872 211.456 288 436.8 288 225.28 0 384.128-208.064 436.8-288-52.608-79.872-211.456-288-436.8-288zm0 64a224 224 0 1 1 0 448 224 224 0 0 1 0-448zm0 64a160.192 160.192 0 0 0-160 160c0 88.192 71.744 160 160 160s160-71.808 160-160-71.744-160-160-160z" />
-          </svg>
+          <img th:src="@{/icon/view.svg}" alt="views" />
           <span th:text="${post.getViews()}">NUMERO VIEWS</span>
         </h3>
       </div>

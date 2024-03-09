@@ -1,48 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <!-- TODO -->
     <title>POST</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
     <!-- title -->
-    <h1 class="blog-title" th:text="'Titolo: ' + ${post.getTitle()}"></h1>
+    <div class="container-post-title">
+        <h1 class="post-title" th:text="${post.getTitle()}"></h1>
+        
+    </div>
 
-    <!-- date -->
-    <p th:text="'Data:' + ${post.getDate()}">data: </p>
+    <div class="container-info">
+        <!-- date -->
+        <p th:text="${post.getDate()}">data: </p>
 
-    <!-- views -->
-    <p th:text="'Views:' + ${post.getViews()}">views: </p>
+        <!-- views -->
+        <p th:text="${post.getViews()} + ' views'">views: </p>
+    </div>
+    <hr class="post">
+    <div class="container-content">
+        <!-- content -->
+        <p th:utext="${#strings.replace(post.getContent(), '&#13;', '<br/>')}"></p>
+    </div>
+    <hr class="post">
 
+    <div class="container-comment">
+        <!-- comments -->
+        <h2>Comments</h2>
+        <ul>
+            <li class="comment-block" th:each="comment : ${post.getComments()}" th:if="${comment != null}">
+                
+                <p class="autore" th:text="${comment.getAuthor()}"></p>
+                <span>-</span>
+                <p class="data" th:text="${comment.getDate()}"></p>
 
-    <!-- content -->
-    <p th:utext="${#strings.replace(post.getContent(), '&#13;', '<br/>')}"></p>
+                <p class="contenuto" th:text="${comment.getContent()}"></p>
+            </li>
+        </ul>
 
-    <!-- comments -->
-    <h2>Comments</h2>
-    <ul>
-        <li th:each="comment : ${post.getComments()}" th:if="${comment != null}">
-            <p th:text="${comment.getContent()}"></p>
-        </li>
-    </ul>
+        <!-- if there isn-t any comment -->
+        <p th:if="${post.getComments().size() == 0}">No comments yet</p>
+
+        <!-- new comment form -->
+        <p>Tell us your opinion!</p>
+        <form th:attr="action='/post/' + ${post.getId()} + '/add-comment'" method="POST">
+            <label for="content">Commento</label> <br>
+            <textarea id="content" name="content"></textarea>
+            <br>
+            <label for="author">Autore</label> <br>
+            <input type="text" id="author" name="author">
+            <br>
+            <button type="submit">Comment</button>
+        </form>
     
-    <!-- if there isn-t any comment -->
-    <p th:if="${post.getComments().size() == 0}">No comments yet</p>
-
-    <!-- new comment form -->
-    <form th:attr="action='/post/' + ${post.getId()} + '/add-comment'" method="POST">
-        <label for="content">Commento</label>
-        <input type="text" id="content" name="content">
-        <br>
-        <label for="author">Autore</label>
-        <input type="text" id="author" name="author">
-        <br>
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email">
-        <br>
-        <button type="submit">Comment</button>
-    </form>
+    </div>
 </body>
+
 </html>

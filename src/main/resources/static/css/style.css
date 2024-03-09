@@ -104,8 +104,8 @@ article {
     border: 1px solid #ccc;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
     margin: 10px;
-    height: 20vh;
     transition: all 0.3s ease;
+
 }
 
 .read {
@@ -133,13 +133,21 @@ article h3 {
 .title {
     padding-top: 10px;
     text-align: center;
-    font-size: 35px;
+    font-size: 30px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis; 
 }
 
 .description {
     word-wrap: break-word;
     padding-top: 10px;
     color: rgba(29, 29, 29, 0.748);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
 }
 
 a {
@@ -303,6 +311,11 @@ a {
     font-size: 50px;
     text-align: center;
     font-family: 'Roboto', sans-serif;
+    display: block;
+}
+
+.post-title::after {
+    content: url(../icon/edit.svg);
 }
 
 .container-post-title {
@@ -367,4 +380,25 @@ a {
 
 .container-comment ul {
     list-style-type: none;
+}
+
+.comment-block .autore {
+    font-weight: bold;
+    display: inline-block;
+}
+
+.comment-block .data {
+    color: #4d4d4d;
+    font-weight: lighter;
+    display: inline-block;
+
+}
+
+
+.comment-block {
+    padding-left: 50px;
+    padding-top: 20px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
 }

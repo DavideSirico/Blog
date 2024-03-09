@@ -13,19 +13,23 @@
         <views>1</views>
         <date>2024-03-01</date>
     </post>
-    <post id="0">
-        <title>a</title>
-        <content>esjkdfhgaskdjfvsadkhfjgvsahkdfgsavdfhjkgvsafhkgsavdfkhgsavdfhjksagvdfghksadf&#13;
-            sdfhgvfksghvasfhkgasvdfhgsadvfsahkdjfvsadhfgvsad,&#13;
-            sahujfbsakhjdfbvsakhjfsadbjfsa.,&#13;
-            sdfhjgvsadfhkgsvahkfgv</content>
-        <category>c</category>
-        <tags>
-            <tag/>
-        </tags>
-        <comments/>
-        <views>91</views>
-        <date>2024-03-03</date>
-    </post>
     
-</blog>
+    
+<post id="1"><title>prova</title><content>dfjkansfsjahbfkajshbfsakjhbfskjhdbf&#13;
+asdfhbsa&#13;
+afas&#13;
+dfs&#13;
+&#13;
+sadfasd&#13;
+fs&#13;
+af&#13;
+sdf&#13;
+sd&#13;
+fasdfsdgdfgdsfg&#13;
+dgdsgdgf&#13;
+dfg&#13;
+dgdsfgsdfgdf&#13;
+waefsefsef&#13;
+sefsefsefsasfgdfsg&#13;
+aewfwe</content><category>test</category><tags><tag>asdklj</tag><tag>sajdof</tag></tags><comments><comment><author>davide</author><content>prova</content><email>davide.sirico@gmail.com</email><date>2024-03-09</date></comment><comment><author>sirico</author><content>BELLO!&#13;
+si</content><date>2024-03-09</date></comment></comments><views>35</views><date>2024-03-09</date></post></blog>

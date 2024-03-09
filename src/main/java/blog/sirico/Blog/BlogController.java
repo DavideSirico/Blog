@@ -79,12 +79,12 @@ public class BlogController {
 	}
 	
 	@PostMapping("/post/{id}/add-comment")
-	public String addComment(@PathVariable String id, @RequestParam String content, @RequestParam String Author, @RequestParam String email, Model model) {
+	public String addComment(@PathVariable String id, @RequestParam String content, @RequestParam String author, Model model) {
 		Post post = posts.getPost(id);
 		if(post == null) {
 			return "redirect:/not-found";
 		}
-		Comment comment = new Comment(content, Author, email, LocalDate.now());
+		Comment comment = new Comment(author, content, LocalDate.now());
 		posts.addComment(id, comment);
 		model.addAttribute("post", post);
 		return "redirect:/post/" + id;

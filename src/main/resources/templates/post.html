@@ -26,12 +26,19 @@
         <!-- content -->
         <p th:utext="${#strings.replace(post.getContent(), '&#13;', '<br/>')}"></p>
     </div>
+    <hr class="post">
+
     <div class="container-comment">
         <!-- comments -->
         <h2>Comments</h2>
         <ul>
-            <li th:each="comment : ${post.getComments()}" th:if="${comment != null}">
-                <p th:text="${comment.getContent()}"></p>
+            <li class="comment-block" th:each="comment : ${post.getComments()}" th:if="${comment != null}">
+                
+                <p class="autore" th:text="${comment.getAuthor()}"></p>
+                <span>-</span>
+                <p class="data" th:text="${comment.getDate()}"></p>
+
+                <p class="contenuto" th:text="${comment.getContent()}"></p>
             </li>
         </ul>
 
@@ -46,9 +53,6 @@
             <br>
             <label for="author">Autore</label> <br>
             <input type="text" id="author" name="author">
-            <br>
-            <label for="email">Email</label> <br>
-            <input type="text" id="email" name="email">
             <br>
             <button type="submit">Comment</button>
         </form>
