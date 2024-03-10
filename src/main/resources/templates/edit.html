@@ -12,7 +12,8 @@
     <!-- title -->
     <div class="container-post-title">
         <h1 class="post-title" th:text="${post.getTitle()}"></h1>
-        <button onclick="edit(this)" class="edit-btn"><img th:src="@{/icon/edit.svg}" alt="edit"></button>
+        <button th:data-id="${post.getId()}" th:onclick="edit_title(this, this.getAttribute('data-id'))" class="edit-btn"><img th:src="@{/icon/edit.svg}" alt="edit"></button>
+
     </div>
 
     <div class="container-info">
@@ -26,7 +27,7 @@
     <div class="container-content">
         <!-- content -->
         <p th:utext="${#strings.replace(post.getContent(), '&#13;', '<br/>')}"></p>
-        <button onclick="edit(this)" class="edit-btn"><img th:src="@{/icon/edit.svg}" alt="edit"></button>
+        <button th:data-id="${post.getId()}" th:onclick="edit_content(this, this.getAttribute('data-id'))" class="edit-btn"><img th:src="@{/icon/edit.svg}" alt="edit"></button>
     </div>
     <hr class="post">
 
@@ -47,30 +48,84 @@
         <!-- if there isn-t any comment -->
         <p th:if="${post.getComments().size() == 0}">No comments yet</p>
 
-        <!-- new comment form -->
-        <p>Tell us your opinion!</p>
-        <form th:attr="action='/post/' + ${post.getId()} + '/add-comment'" method="POST">
-            <label for="content">Commento</label> <br>
-            <textarea id="content" name="content"></textarea>
-            <br>
-            <label for="author">Autore</label> <br>
-            <input type="text" id="author" name="author">
-            <br>
-            <button type="submit">Comment</button>
-        </form>
-
     </div>
     <script>
-        function edit(element) {
-            element_before = element.previousElementSibling;
-            element_before.setAttribute("contenteditable", "true");
-            element_before.focus();
+        function edit_title(button, id) {
+            // transform the title into an input
+            var title = document.querySelector('.post-title');
+            var input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            // add a class to the input
+            input.classList.add('post-title');
+
+            input.value = title.textContent;
+            title.parentNode.replaceChild(input, title);
+            input.focus();
 
             // change the button
-            element.setAttribute("onclick", "save(this)");
-            element.innerHTML = "<img src='/icon/save.svg' alt='save'>";
-
+            button.setAttribute('onclick', 'save_title(this, ' + id + ')');
+            button.innerHTML = '<img src="/icon/tick.svg" alt="save">';
         }
+
+        function edit_content(button, id) {
+            // transform the content into an input
+            var content = document.querySelector('.container-content p');
+            var input = document.createElement('textarea');
+            input.value = content.textContent;
+            content.parentNode.replaceChild(input, content);
+            input.focus();
+
+            // change the button
+            button.setAttribute('onclick', 'save_content(this, ' + id + ')');
+            button.innerHTML = '<img src="/icon/tick.svg" alt="save">';
+        }
+
+
+        function save_title(button, id) {
+            var input = document.querySelector('.container-post-title input');
+            var new_title = input.value;
+            
+            // transform the input into a title
+            var title = document.createElement('h1');
+            title.classList.add('post-title');
+            title.textContent = new_title;
+            input.parentNode.replaceChild(title, input);
+
+
+            // change the button
+            button.setAttribute('onclick', 'edit_title(this, ' + id + ')');
+            button.innerHTML = '<img src="/icon/edit.svg" alt="edit">';
+
+            // send the new title to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/post/' + id + '/edit-title', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('title=' + new_title);
+        }
+
+        function save_content(button, id) {
+            var input = document.querySelector('.container-content textarea');
+            var new_content = input.value;
+
+            // transform the input into a paragraph
+            var content = document.createElement('p');
+            content.textContent = new_content;
+            input.parentNode.replaceChild(content, input);
+
+
+            // change the button
+            button.setAttribute('onclick', 'edit_content(this, ' + id + ')');
+            button.innerHTML = '<img src="/icon/edit.svg" alt="edit">';
+
+            // send the new content to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/post/' + id + '/edit-content', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('content=' + new_content);
+        }
+        
+
+        
     </script>
 </body>
 </html>

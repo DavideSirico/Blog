@@ -5,8 +5,6 @@ import java.time.*;
 
 public class Post {
     private String id;
-    private String category;
-    private ArrayList<String> tags;
     private String title;
     private String content;
     private ArrayList<Comment> comments;
@@ -15,8 +13,6 @@ public class Post {
 
     public Post(String id){
         this.id = id;
-        this.category = "";
-        this.tags = new ArrayList<String>();
         this.title = "";
         this.content = "";
         this.comments = new ArrayList<Comment>();
@@ -24,10 +20,8 @@ public class Post {
         this.date = null;
     }
     
-    public Post(String id, String title, String content, String category, ArrayList<String> tags, ArrayList<Comment> comments, int views, LocalDate date){
+    public Post(String id, String title, String content, ArrayList<Comment> comments, int views, LocalDate date){
         this.id = id;
-        this.category = category;
-        this.tags = tags;
         this.title = title;
         this.content = content;
         this.comments = comments;
@@ -43,20 +37,8 @@ public class Post {
         this.comments.add(comment);
     }
 
-    public void addTag(String tag){
-        this.tags.add(tag);
-    }
-
     public String getId(){
         return this.id;
-    }
-
-    public String getCategory(){
-        return this.category;
-    }
-
-    public ArrayList<String> getTags(){
-        return this.tags;
     }
 
     public String getTitle(){
@@ -83,5 +65,12 @@ public class Post {
         return this.content.substring(0, Math.min(this.content.length(), 150));
     }
 
+    public void setContent(String content){
+        this.content = content;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
 
 }

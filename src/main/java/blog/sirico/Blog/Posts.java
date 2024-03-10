@@ -61,4 +61,23 @@ public class Posts implements Iterable<Post> {
         }
     }
 
+    public void editTitle(String id, String title){
+        Post post = getPost(id);
+        if(post != null){
+            post.setTitle(title);
+            xml.editTitle(id, title);
+        }
+    }
+
+    public void editContent(String id, String content){
+        Post post = getPost(id);
+        if(post != null){
+            post.setContent(content);
+            xml.editContent(id, content);
+        }
+    }
+
+    public int getLastId() {
+        return xml.getLastId();
+    }
 }

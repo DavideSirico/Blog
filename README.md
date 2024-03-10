@@ -27,19 +27,19 @@ Blog: Gestione di articoli, categorie, tag e commenti.
 
 
 TODO:
-- [ ] Creare un file XML con almeno 3 livelli oltre l'elemento radice
-- [ ] Creare un file XSD che valida il file XML
-- [ ] Implementare la richiesta di visualizzazione di un tipo di elemento del file XML
+- [X] Creare un file XML con almeno 3 livelli oltre l'elemento radice
+- [X] Creare un file XSD che valida il file XML
+- [X] Implementare la richiesta di visualizzazione di un tipo di elemento del file XML
 - [X] Aggiungere login
-- [ ] !Modifica dei post
-- [ ] CSS
+- [X] !Modifica dei post
+- [X] CSS
 - [X] Rimozione dei post
-- [ ] !Aggiunta di categorie e tag
-- [ ] !Aggiunta di commenti
-- [ ] Ricerca dei post
+~~- [X] !Aggiunta di categorie e tag~~
+- [X] !Aggiunta di commenti
+- [X] Ricerca dei post
 - [X] Paginazione
-- [ ] !Link che portano al post
-- [ ] Pagina per modificare i post
+- [X] !Link che portano al post
+- [X] Pagina per modificare i post
 - [ ] Pagina per aggiungere i post (solo CSS)
-- [ ] Implementare la ricerca
+- [X] Implementare la ricerca
 - [ ] !Link che porta alla home

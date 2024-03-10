@@ -205,6 +205,9 @@ a {
     background: #43A047;
 }
 
+
+
+
 .edit-btn {
     outline: 0;
     border: 0;
@@ -325,6 +328,13 @@ a {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     display: block;
+}
+
+.container-post-title input {
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    width: inherit;
 }
 
 .container-post-title {

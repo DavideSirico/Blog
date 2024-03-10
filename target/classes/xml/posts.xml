@@ -1,35 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><blog>
-    <post id="4">
-        <title>asd</title>
-        <content>asd</content>
-        <category>asd</category>
-        <tags>
-            <tag>PHP</tag>
-            <tag>JavaScript</tag>
-            <tag>CSS</tag>
-            <tag>asdasd</tag>
-        </tags>
-        <comments/>
-        <views>1</views>
-        <date>2024-03-01</date>
+<?xml version="1.0" encoding="UTF-8"?>
+<blog>
+    <post id="1">
+        <title>sdfgdsfgdsfsdfg</title>
+        <content>sdgdsgdsfgdgsf</content>
+        <views>3</views>
+        <date>2024-03-10</date>
+        <comment>
+            <author>fghfdghfdh</author>
+            <content>dsfghdfh</content>
+            <date>2024-03-10</date>
+        </comment>
     </post>
-    
-    
-<post id="1"><title>prova</title><content>dfjkansfsjahbfkajshbfsakjhbfskjhdbf&#13;
-asdfhbsa&#13;
-afas&#13;
-dfs&#13;
-&#13;
-sadfasd&#13;
-fs&#13;
-af&#13;
-sdf&#13;
-sd&#13;
-fasdfsdgdfgdsfg&#13;
-dgdsgdgf&#13;
-dfg&#13;
-dgdsfgsdfgdf&#13;
-waefsefsef&#13;
-sefsefsefsasfgdfsg&#13;
-aewfwe</content><category>test</category><tags><tag>asdklj</tag><tag>sajdof</tag></tags><comments><comment><author>davide</author><content>prova</content><email>davide.sirico@gmail.com</email><date>2024-03-09</date></comment><comment><author>sirico</author><content>BELLO!&#13;
-si</content><date>2024-03-09</date></comment></comments><views>35</views><date>2024-03-09</date></post></blog>
+    <post id="2">
+        <title>fdsfgdfs</title>
+        <content>ggsd</content>
+        <views>0</views>
+        <date>2024-03-10</date>
+    </post>
+</blog>

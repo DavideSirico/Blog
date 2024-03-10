@@ -9,6 +9,8 @@ import java.util.*;
 import java.time.*;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class BlogController {
@@ -25,25 +27,10 @@ public class BlogController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("posts", posts);
-		model.addAttribute("logged", logged);
-		for(Post post : posts.getPosts()){
-			for(String tag : post.getTags()){
-				System.out.println(tag);
-			}
-		}
+		model.addAttribute("logged", this.logged);
 		return "index";
 	}
 	
-	@GetMapping("/index-old")
-	public String indexOld(Model model) {
-		model.addAttribute("posts", posts);
-		for(Post post : posts.getPosts()){
-			for(String tag : post.getTags()){
-				System.out.println(tag);
-			}
-		}
-		return "index.old";
-	}
 
 	@GetMapping("/post/{id}")
 	public String post(@PathVariable String id, Model model) {
@@ -64,15 +51,18 @@ public class BlogController {
 	// form to create a new post
 	@GetMapping("/new-post")
 	public String newPost(Model model) {
+		if(!this.logged) {
+			return "redirect:/login";
+		}
 		return "new-post";
 	}
 
 	@PostMapping("/new-post")
-	public String newPost(@RequestParam String title, @RequestParam String content, @RequestParam String category, @RequestParam String tags, Model model) {
+	public String newPost(@RequestParam String title, @RequestParam String content, Model model) {
 		// get last post id
-		String id = Integer.toString(posts.getPosts().size());
-		ArrayList<String> tagsList = new ArrayList<String>(Arrays.asList(tags.split(",")));
-		Post post = new Post(id, title, content, category, tagsList, new ArrayList<Comment>(), 0, LocalDate.now());
+		int last_id = posts.getLastId();
+		String id = Integer.toString(last_id + 1);
+		Post post = new Post(id, title, content, new ArrayList<Comment>(), 0, LocalDate.now());
 		posts.addPost(post);
 		// redirect to the home page
 		return "redirect:/";
@@ -101,7 +91,7 @@ public class BlogController {
 		System.out.println(username);
 		System.out.println(password);
 		if(user.getUsername().equals(username) && user.checkPassword(password)) {
-			logged = true;
+			this.logged = true;
 			return "redirect:/";
 		}
 		return "redirect:/login?error=username o password sbagliato";
@@ -109,18 +99,24 @@ public class BlogController {
 
 	@GetMapping("/logout")
 	public String logout() {
-		logged = false;
+		this.logged = false;
 		return "redirect:/";
 	}
 
 	@PostMapping("/remove")
 	public String postMethodName(@RequestParam String id) {
+		if(!this.logged) {
+			return "redirect:/login";
+		}
 		posts.removePost(id);
 		return "redirect:/";
 	}
 
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable String id, Model model) {
+		if(!this.logged) {
+			return "redirect:/login";
+		}
 		Post post = posts.getPost(id);
 		if(post == null) {
 			return "redirect:/not-found";
@@ -128,5 +124,47 @@ public class BlogController {
 		model.addAttribute("post", post);
 		return "edit";
 	}
+
+	@PostMapping("/post/{id}/edit-title")
+	public String editTitle(@PathVariable String id, @RequestParam String title, Model model) {
+		if(!this.logged) {
+			return "redirect:/login";
+		}
+		Post post = posts.getPost(id);
+		if(post == null) {
+			return "redirect:/not-found";
+		}
+		posts.editTitle(id, title);
+		return "redirect:/post/" + id;
+	}
+
+	@PostMapping("/post/{id}/edit-content")
+	public String editContent(@PathVariable String id, @RequestParam String content, Model model) {
+		if(!this.logged) {
+			return "redirect:/login";
+		}
+		Post post = posts.getPost(id);
+		if(post == null) {
+			return "redirect:/not-found";
+		}
+		posts.editContent(id, content);
+		return "redirect:/post/" + id;
+	}
+
+	// search
+	@GetMapping("/search")
+	public String search(@RequestParam String q, Model model) {
+		List<Post> result = new ArrayList<Post>();
+		for(Post post : posts) {
+			if(post.getTitle().toLowerCase().contains(q.toLowerCase()) || post.getContent().toLowerCase().contains(q.toLowerCase())) {
+				result.add(post);
+			}
+		}
+		model.addAttribute("posts", result);
+		model.addAttribute("logged", this.logged);
+		return "index";
+	}
+
+	
 
 }
