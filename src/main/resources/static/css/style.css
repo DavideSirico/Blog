@@ -136,7 +136,7 @@ article h3 {
     font-size: 30px;
     white-space: nowrap;
     overflow-x: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
 
 .description {
@@ -145,8 +145,9 @@ article h3 {
     color: rgba(29, 29, 29, 0.748);
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-            line-clamp: 2; 
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
@@ -202,6 +203,18 @@ a {
 .form button:active,
 .form button:focus {
     background: #43A047;
+}
+
+.edit-btn {
+    outline: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
 }
 
 .dropbtn {
@@ -314,15 +327,14 @@ a {
     display: block;
 }
 
-.post-title::after {
-    content: url(../icon/edit.svg);
-}
-
 .container-post-title {
     padding-top: 50px;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container-info {

@@ -12,7 +12,7 @@
     <!-- title -->
     <div class="container-post-title">
         <h1 class="post-title" th:text="${post.getTitle()}"></h1>
-        
+        <button onclick="edit(this)" class="edit-btn"><img th:src="@{/icon/edit.svg}" alt="edit"></button>
     </div>
 
     <div class="container-info">
@@ -26,6 +26,7 @@
     <div class="container-content">
         <!-- content -->
         <p th:utext="${#strings.replace(post.getContent(), '&#13;', '<br/>')}"></p>
+        <button onclick="edit(this)" class="edit-btn"><img th:src="@{/icon/edit.svg}" alt="edit"></button>
     </div>
     <hr class="post">
 
@@ -34,7 +35,7 @@
         <h2>Comments</h2>
         <ul>
             <li class="comment-block" th:each="comment : ${post.getComments()}" th:if="${comment != null}">
-                
+
                 <p class="autore" th:text="${comment.getAuthor()}"></p>
                 <span>-</span>
                 <p class="data" th:text="${comment.getDate()}"></p>
@@ -57,8 +58,19 @@
             <br>
             <button type="submit">Comment</button>
         </form>
-    
-    </div>
-</body>
 
+    </div>
+    <script>
+        function edit(element) {
+            element_before = element.previousElementSibling;
+            element_before.setAttribute("contenteditable", "true");
+            element_before.focus();
+
+            // change the button
+            element.setAttribute("onclick", "save(this)");
+            element.innerHTML = "<img src='/icon/save.svg' alt='save'>";
+
+        }
+    </script>
+</body>
 </html>
