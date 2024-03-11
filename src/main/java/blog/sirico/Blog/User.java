@@ -28,6 +28,8 @@ public class User {
         return verified;
     }
 
+    
+
     public String getUsername() {
         return username;
     }

@@ -1,14 +1,15 @@
 package blog.sirico.Blog;
 
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.annotation.PostConstruct;
+
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 import java.util.*;
 import java.time.*;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -18,13 +19,14 @@ public class BlogController {
 	private User user;
 	private boolean logged = false;
 
-	@Value("${path}")
-	private String path;
+	@Value("${xml.path:src/main/resources/xml/posts.xml}")
+    private String path;
 
-	public BlogController() {
+	@PostConstruct
+	public void init() {
 		user = new User("admin", "admin");
 		System.out.println(path);
-		posts = new Posts("src/main/resources/xml/posts.xml");
+		posts = new Posts(path);
 	}
 
 	@GetMapping("/")
@@ -40,6 +42,7 @@ public class BlogController {
 		if(post == null) {
 			return "redirect:/not-found";
 		}
+		
 		posts.addView(id);
 		model.addAttribute("post", post);
 		return "post";

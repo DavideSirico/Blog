@@ -21,7 +21,14 @@ public class XML {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             documentBuilderFactory.setIgnoringElementContentWhitespace(true);
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            this.doc = documentBuilder.parse(new File(filename));
+            if(new File(filename).exists()) {
+                this.doc = documentBuilder.parse(new File(filename));
+            } else {
+                this.doc = documentBuilder.newDocument();
+                Element root = doc.createElement("blog");
+                doc.appendChild(root);
+                write();
+            }
         }
         catch (Exception e) {
             System.out.println("Error parsing XML file");
