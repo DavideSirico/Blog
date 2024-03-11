@@ -1,16 +1,12 @@
 package blog.sirico.Blog;
 
 import org.springframework.web.bind.annotation.*;
-
 import jakarta.annotation.PostConstruct;
-
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-
 import java.util.*;
 import java.time.*;
-
 
 @Controller
 public class BlogController {
@@ -22,12 +18,16 @@ public class BlogController {
 	@Value("${xml.path:src/main/resources/xml/posts.xml}")
     private String path;
 
+	/**
+     * Initializes the controller.
+     * This method is called after the controller is constructed.
+     */
 	@PostConstruct
 	public void init() {
 		user = new User("admin", "admin");
-		System.out.println(path);
 		posts = new Posts(path);
 	}
+
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -42,7 +42,7 @@ public class BlogController {
 		if(post == null) {
 			return "redirect:/not-found";
 		}
-		
+		// increment the number of views of the post(id)
 		posts.addView(id);
 		model.addAttribute("post", post);
 		return "post";
@@ -93,13 +93,13 @@ public class BlogController {
 
 	@PostMapping("/login") 
 	public String login(@RequestParam String username, @RequestParam String password, Model model) {
-		System.out.println(username);
-		System.out.println(password);
+		// check if the username and password are correct
 		if(user.getUsername().equals(username) && user.checkPassword(password)) {
 			this.logged = true;
 			return "redirect:/";
 		}
-		return "redirect:/login?error=username o password sbagliato";
+		// if the username or password are wrong, redirect to the login page with an error message
+		return "redirect:/login?error=username o password sbagliate";
 	}
 
 	@GetMapping("/logout")

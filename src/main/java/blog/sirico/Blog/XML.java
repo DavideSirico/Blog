@@ -22,8 +22,10 @@ public class XML {
             documentBuilderFactory.setIgnoringElementContentWhitespace(true);
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             if(new File(filename).exists()) {
+                // parse the xml file
                 this.doc = documentBuilder.parse(new File(filename));
             } else {
+                // create a new xml file with the root element
                 this.doc = documentBuilder.newDocument();
                 Element root = doc.createElement("blog");
                 doc.appendChild(root);
@@ -37,6 +39,7 @@ public class XML {
     }
 
     public ArrayList<Post> getPosts() {
+        // create an array list of posts empty
         ArrayList<Post> posts = new ArrayList<Post>();
         try {
             // get the root element
@@ -48,7 +51,6 @@ public class XML {
             for(int i = 0; i < postNodes.getLength(); i++) {
                 if(postNodes.item(i).getNodeType() != Node.ELEMENT_NODE) continue;
 
-                System.out.println("Parsing post " + i);
                 Element postElement = (Element)postNodes.item(i);
 
                 String id = postElement.getAttribute("id");
@@ -57,6 +59,7 @@ public class XML {
 
                 NodeList commentNodes = postElement.getElementsByTagName("comment");
                 ArrayList<Comment> comments = new ArrayList<Comment>();
+                // for each comment element
                 for(int j = 0; j < commentNodes.getLength(); j++) {
                     Element commentElement = (Element)commentNodes.item(j);
                     String author = commentElement.getElementsByTagName("author").item(0).getTextContent();
@@ -73,31 +76,13 @@ public class XML {
                 posts.add(new Post(id, title, content, comments, views, date));
             }
         } catch (Exception e) {
-            System.out.println("Error parsing XML file");
+            System.out.println("Error getting the posts from the XML doc.");
             e.printStackTrace();
         }
         return posts;
     }
-    public void updateViews(String id, int views) {
-        try {
-            // Get the post with the matching id
-            NodeList nList = doc.getElementsByTagName("post");
-            for (int i = 0; i < nList.getLength(); i++) {
-                Node nNode = nList.item(i);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    if (eElement.getAttribute("id").equals(id)) {
-                        // Update the views element
-                        eElement.getElementsByTagName("views").item(0).setTextContent(Integer.toString(views));
-                    }
-                }
-            }
-            write();
-        } catch (Exception e) {
-            System.out.println("Error updating the post.xml file");
-            e.printStackTrace();
-        }
-    }
+
+    // write the document on the file
     private void write() {
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -110,6 +95,7 @@ public class XML {
             e.printStackTrace();
         }
     }
+
     public void addPost(Post post) {
         try {
             // get the root element
@@ -165,10 +151,11 @@ public class XML {
                 write();
             }
         } catch (Exception e) {
-            System.out.println("Error adding a view to the post.xml file");
+            System.out.println("Error updating the views of the post " + post.getId() + " in the post.xml file");
             e.printStackTrace();
         }
     }
+
     public void addView(String id) {
         try {
             Element postElement = findPost(id);
@@ -179,7 +166,7 @@ public class XML {
                 write();
             }
         } catch (Exception e) {
-            System.out.println("Error adding a view to the post.xml file");
+            System.out.println("Error updating the views of the post " + id + " in the post.xml file");
             e.printStackTrace();
         }
     }
@@ -199,11 +186,10 @@ public class XML {
                 dateElement.appendChild(doc.createTextNode(comment.getDate().toString()));
                 commentElement.appendChild(dateElement);
                 postElement.appendChild(commentElement);
-                System.out.println("Adding comment to post " + id);
                 write();
             }
         } catch (Exception e) {
-            System.out.println("Error adding a view to the post.xml file");
+            System.out.println("Error adding a comment to the post " + id + " in the post.xml file");
             e.printStackTrace();
         }
     }
@@ -266,10 +252,12 @@ public class XML {
     public int getLastId() {
         NodeList nList = doc.getElementsByTagName("post");
         // get the last post element
+        // if there are no posts in the file
         if(nList.getLength() > 0) {
             Element eElement = (Element)nList.item(nList.getLength() - 1);
             return Integer.parseInt(eElement.getAttribute("id"));
         }
+        // if there are no posts in the file it returns -1 because the first is post starts at 0 an not at 1
         return -1;
     }
 }

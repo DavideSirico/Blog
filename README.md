@@ -42,84 +42,105 @@ TODO:
 - [X] Implementare la ricerca
 - [ ] !Link che porta alla home
 
+Determining workspace structure
 
-## Struttura del progetto
-Il progetto utilizza il framework Spring Boot per la gestione del server e del client.
-Il progetto è formato da 7 classi:
-- `BlogApplication` è la classe principale del progetto e contiene il metodo main
-- `BlogController` è la classe che gestisce le richieste HTTP e restituisce le pagine HTML al client
-- `Comment` è la classe che rappresenta un commento
-- `Post` è la classe che rappresenta un post
-- `Posts` è la classe che rappresenta la lista dei post e contiene i metodi per gestire i post (aggiunta, rimozione, modifica, ricerca) e per salvare i post su un file XML
-- `XML` è la classe che si occupa di leggere e scrivere i file XML
-- `User` è la classe che rappresenta un utente
+Deciding which workspace information to collect
 
-Nella cartella `resources` sono presenti le cartelle:
-- `static` che contiene i file CSS e JS
-- `templates` che contiene i file HTML
-- `xml` che contiene il file XML e il file XSD
+Gathering workspace info
+
+# Blog Application
+
+This is a simple blog application built with Spring Boot and Maven.
 
 
 
+## Project structure
+The project uses the Spring Boot framework to manage the server and client.
+The project is made up of 7 classes:
+- `BlogApplication` is the main class of the project and contains the main method
+- `BlogController` is the class that handles HTTP requests and returns HTML pages to the client
+- `Comment` is the class that represents a comment
+- `Post` is the class that represents a post
+- `Posts` is the class that represents the list of posts and contains the methods to manage posts (add, remove, edit, search) and to save posts to an XML file
+- `XML` is the class that reads and writes XML files
+- `User` is the class that represents a user
 
+In the `resources` folder there are the folders:
+- `static` which contains the CSS and JS files
+- `templates` which contains the HTML files
+- `xml` which contains the XML file and the XSD file
+- `application.properties` which contains the configuration of the application
 
-## Struttura del file XML
-Il file XML è strutturato in questo modo:
+## XML file structure
+The XML file is structured as follows:
 ```xml
 <blog>
     <post id="0">
-        <title>Titolo</title>
-        <content>Contenuto</content>
-        <author>Autore</author>
+        <title>Title</title>
+        <content>Content</content>
+        <author>Author</author>
         <date>2021-12-12</date>
         <comment>
-            <id>1</id>
-            <author>Autore</author>
-            <content>Contenuto</content>
+            <author>Author</author>
+            <content>Content of the comment</content>
             <date>2021-12-12</date>
         </comment>
     </post>
 </blog>
 ```
-Dove `blog` è l'elemento radice, `post` è un elemento figlio di `blog` e `comment` è un elemento figlio di `post`. L'elemento `post` ha un attributo `id` che è un intero.
-Per ogni post ci possono essere più commenti.
-E non ci possono essere due post con lo stesso id.
+Where `blog` is the root element, `post` is a child element of `blog` and `comment` is a child element of `post`. The `post` element has an `id` attribute that is an integer.
+For each post there can be multiple comments but there can't be two posts with the same id.
 
-
-## Installazione
-- scaricare l'ultima versione del file jar dalle release
-- eseguire il file jar con il comando `java -jar nomefile.jar --xml.path="prova"`
-
-## Sviluppo
-Per sviluppare il progetto è necessario avere installato:
+## Building 
+To build the project you need to have installed:
 - Java 21
 - Maven 3.8.1
 
-Per eseguire il progetto in locale:
-- Clonare il progetto
-- Eseguire il comando `./mvnw clean install`
-- Eseguire il comando `./mvnw spring-boot:run`
-- Aprire il browser e andare all'indirizzo `http://localhost:8080`
+To build the project:
+- Clone the project
+- Run the command `./mvnw package`
+This command compiles the code, runs the tests, and packages the resulting binaries in a JAR file.
 
-Se si vuole abilitare il live reload:
-- cambiare nel file `application.properties` la riga `spring.devtools.livereload.enabled = false` in `spring.devtools.livereload.enabled = true`, la riga `spring.devtools.restart.enabled = false` in `spring.devtools.restart.enabled = true` e la riga `spring.devtools.add-properties = false` in `spring.devtools.add-properties = true`
 
-il file `application.properties` sarà così:
-```properties
-spring.thymeleaf.cache = true
-spring.devtools.add-properties = false
-spring.devtools.restart.enabled = false
-spring.devtools.livereload.enabled = false
-logging.level.web = DEBUG
-```
+## Running
+To run the project you need to have installed:
+- Java 21
+- The JAR file built in the previous step or downloaded from the release
 
-## Contribuire
-Per contribuire al progetto è necessario:
-- Forkare il progetto
-- Creare un branch con il proprio nome
-- Eseguire il comando `git checkout -b nome-branch`
-- Eseguire il comando `git commit -m "messaggio"`
-- Eseguire il comando `git push origin nome-branch`
-- Creare una pull request
-- Attendere la revisione
+To run the project:
+- Run the command `java -jar Blog.jar --xml.path="path"` where `path` is the path of the XML file
+Or:
+- Run the command `./mvnw spring-boot:run --xml.path="path"` where `path` is the path of the XML file
+The server will start and you can access it by opening a browser and going to the address `http://localhost:8080`
 
+
+## Development
+To run the project locally:
+- Clone the project
+- Run the command `./mvnw clean install`
+- Run the command `./mvnw spring-boot:run`
+- Open the browser and go to the address `http://localhost:8080`
+
+
+### Application Properties
+The application.properties file in the src/main/resources directory contains configuration properties for the application. You can modify this file to change the application's configuration.
+
+### Static Resources
+The src/main/resources/static directory contains static resources for the application, such as CSS files and icons.
+
+### Templates
+The src/main/resources/templates directory contains the HTML templates for the application's views.
+
+### XML Data
+The src/main/resources/xml directory contains XML data used by the application. The posts.xml file contains the blog posts, and the schema.xsd file contains the XML schema for the blog posts.
+
+
+## Contributing
+For contributing to the project it is necessary to:
+- Fork the project
+- Create a branch with your name
+- Run the command `git checkout -b name-branch`
+- Run the command `git commit -m "message"`
+- Run the command `git push origin name-branch`
+- Create a pull request
+- Wait for the review

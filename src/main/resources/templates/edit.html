@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- TODO -->
-    <title>POST</title>
+    <title>Edit Post</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
@@ -12,6 +11,7 @@
     <!-- title -->
     <div class="container-post-title">
         <h1 class="post-title" th:text="${post.getTitle()}"></h1>
+        <!-- idk why the Thymeleaf needs this to work -->
         <button th:data-id="${post.getId()}" th:onclick="edit_title(this, this.getAttribute('data-id'))" class="edit-btn"><img th:src="@{/icon/edit.svg}" alt="edit"></button>
 
     </div>
@@ -122,10 +122,7 @@
             xhr.open('POST', '/post/' + id + '/edit-content', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send('content=' + new_content);
-        }
-        
-
-        
+        }        
     </script>
 </body>
 </html>

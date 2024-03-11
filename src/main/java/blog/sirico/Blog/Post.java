@@ -61,8 +61,8 @@ public class Post {
         return this.date;
     }
 
-    public String getDescription(){
-        return this.content.substring(0, Math.min(this.content.length(), 150));
+    public String getDescription(int max_length){
+        return this.content.substring(0, Math.min(this.content.length(), max_length));
     }
 
     public void setContent(String content){

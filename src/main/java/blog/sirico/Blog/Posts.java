@@ -3,16 +3,20 @@ package blog.sirico.Blog;
 import java.util.*;
 
 
+// This class represents a collection of posts 
+// I've implemented the Iterable interface so that I can use the for-each loop to iterate over the posts
 public class Posts implements Iterable<Post> {
     private List<Post> posts;
     private XML xml;
 
     public Posts(String filename){
         xml = new XML(filename);
+        // I get the post from the xml file
         posts = xml.getPosts();
     }
     
     public void addPost(Post post){
+        // I add the post to the list of posts and to the xml file
         posts.add(post);
         xml.addPost(post);
     }
@@ -20,7 +24,6 @@ public class Posts implements Iterable<Post> {
     public List<Post> getPosts(){
         return posts;
     }
-
 
     public Post getPost(String id){
         for(Post post : posts){
@@ -47,15 +50,16 @@ public class Posts implements Iterable<Post> {
         }
     }
 
+    // implementing the Iterable interface
     @Override
     public Iterator<Post> iterator() {
         return posts.iterator();
     }
 
+    
     public void removePost(String id){
         Post post = getPost(id);
         if(post != null){
-            System.out.println("Removing post " + id);
             posts.remove(post);
             xml.removePost(id);
         }
