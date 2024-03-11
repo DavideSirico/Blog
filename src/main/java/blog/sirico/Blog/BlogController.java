@@ -9,7 +9,6 @@ import java.util.*;
 import java.time.*;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -164,7 +163,5 @@ public class BlogController {
 		model.addAttribute("logged", this.logged);
 		return "index";
 	}
-
-	
 
 }
