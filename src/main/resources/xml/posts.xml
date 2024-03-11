@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<blog>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><blog>
     <post id="1">
         <title>sdfgdsfgdsfsdfg</title>
         <content>sdgdsgdsfgdgsf</content>
-        <views>3</views>
+        <views>34</views>
         <date>2024-03-10</date>
         <comment>
             <author>fghfdghfdh</author>
@@ -12,9 +11,9 @@
         </comment>
     </post>
     <post id="2">
-        <title>fdsfgdfs</title>
+        <title>titolo</title>
         <content>ggsd</content>
-        <views>0</views>
+        <views>15</views>
         <date>2024-03-10</date>
     </post>
 </blog>

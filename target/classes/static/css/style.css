@@ -82,7 +82,7 @@
     grid-template-columns: repeat(3, 30.7%);
     margin-left: auto;
     margin-right: auto;
-    width: 75%;
+    width: 70%;
     padding-top: 40px;
     padding-bottom: 40px;
     height: auto;
@@ -90,7 +90,7 @@
 }
 
 hr {
-    width: 75%;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -142,6 +142,7 @@ article h3 {
 .description {
     word-wrap: break-word;
     padding-top: 10px;
+    padding-bottom: 10px;
     color: rgba(29, 29, 29, 0.748);
     overflow: hidden;
     display: -webkit-box;
@@ -215,6 +216,7 @@ a {
     margin: 0;
     background-color: #FFFFFF;
     font-size: 14px;
+    padding-top: 5px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
