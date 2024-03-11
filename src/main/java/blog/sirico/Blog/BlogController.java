@@ -2,14 +2,11 @@ package blog.sirico.Blog;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 import java.time.*;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -19,8 +16,12 @@ public class BlogController {
 	private User user;
 	private boolean logged = false;
 
+	@Value("${path}")
+	private String path;
+
 	public BlogController() {
 		user = new User("admin", "admin");
+		System.out.println(path);
 		posts = new Posts("src/main/resources/xml/posts.xml");
 	}
 
@@ -30,7 +31,6 @@ public class BlogController {
 		model.addAttribute("logged", this.logged);
 		return "index";
 	}
-	
 
 	@GetMapping("/post/{id}")
 	public String post(@PathVariable String id, Model model) {
@@ -164,7 +164,5 @@ public class BlogController {
 		model.addAttribute("logged", this.logged);
 		return "index";
 	}
-
-	
 
 }
