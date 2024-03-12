@@ -36,8 +36,10 @@
           <!-- If the user is not logged -->
           <div id="myDropdown" class="dropdown-content">
             <a th:if="${logged}" th:href="@{/new-post}">Create new post</a>
-            <a th:href="${!logged} ? @{/login} : @{/logout}" th:text="${!logged} ? 'Login' : 'Logout'">Login</a>
-
+            <a th:if="${!logged}" th:href="@{/login}" th:text="Login">Login</a>
+            <form th:action="@{/logout}" method="post">
+              <input class="logout" th:if="${logged}" type="submit" value="Logout"> 
+            </form>
           </div>
         </div>
       </div>

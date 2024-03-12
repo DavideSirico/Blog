@@ -38,7 +38,7 @@ TODO:
 - [X] Paginazione
 - [X] !Link che portano al post
 - [X] Pagina per modificare i post
-- [ ] !Pagina per aggiungere i post (solo CSS)
+- [X] !Pagina per aggiungere i post (solo CSS)
 - [X] Implementare la ricerca
 - [ ] !Link che porta alla home
 
@@ -63,7 +63,7 @@ The project is made up of 7 classes:
 - `Post` is the class that represents a post
 - `Posts` is the class that represents the list of posts and contains the methods to manage posts (add, remove, edit, search) and to save posts to an XML file
 - `XML` is the class that reads and writes XML files
-- `User` is the class that represents a user
+- `WebSecurityConfig` is the class that handles the security of the application such as login and logout
 
 In the `resources` folder there are the folders:
 - `static` which contains the CSS and JS files
@@ -98,7 +98,7 @@ To build the project you need to have installed:
 
 To build the project:
 - Clone the project
-- Run the command `./mvnw package`
+- Run the command `./mvnw verify`
 This command compiles the code, runs the tests, and packages the resulting binaries in a JAR file.
 
 
@@ -144,3 +144,9 @@ For contributing to the project it is necessary to:
 - Run the command `git push origin name-branch`
 - Create a pull request
 - Wait for the review
+
+
+## To create a new release (for maintainers only (litteraly only me))
+To create a new release:
+- Create a new tag with the command `git tag -a v1.0.0 -m "Release 1.0.0"`
+- Push the tag with the command `git push origin v1.0.0`
