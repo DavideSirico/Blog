@@ -294,12 +294,21 @@ a {
     display: block;
 }
 
-.container-post-title input {
+.post-title-input {
     font-size: 50px;
     font-family: 'Roboto', sans-serif;
     display: block;
-    width: inherit;
+
+    width: 75%;
 }
+
+.container-post-title form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 .container-post-title {
     padding-top: 50px;

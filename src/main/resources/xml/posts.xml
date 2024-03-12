@@ -2,7 +2,7 @@
     <post id="1">
         <title>sdfgdsfgdsfsdfg</title>
         <content>sdgdsgdsfgdgsf</content>
-        <views>34</views>
+        <views>35</views>
         <date>2024-03-10</date>
         <comment>
             <author>fghfdghfdh</author>
@@ -13,7 +13,7 @@
     <post id="2">
         <title>titolo</title>
         <content>ggsd</content>
-        <views>18</views>
+        <views>20</views>
         <date>2024-03-10</date>
     </post>
-</blog>
+<post id="3"><title>ciao</title><content>ciao</content><views>6</views><date>2024-03-12</date></post></blog>
