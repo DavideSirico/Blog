@@ -74,7 +74,7 @@
         </h3>
       </div>
       <h2 class="title" th:text="${post.getTitle()}">TITOLO</h2>
-      <p class="description" th:text="${post.getDescription()}">PARAGRAFO</p>
+      <p class="description" th:text="${post.getDescription(150)}">PARAGRAFO</p>
       <a th:href="@{'/post/' + ${post.getId()}}" class="read">Read the post</a>
     </article>
   </div>
