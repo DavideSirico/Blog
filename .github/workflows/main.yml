@@ -16,6 +16,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
         
+    # edit the application.properties file 
+    - name: edit application.properties
+      run: |
+        echo "spring.thymeleaf.cache = true" > src/main/resources/application.properties
+        echo "spring.devtools.add-properties = false" >> src/main/resources/application.properties
+        echo "spring.devtools.restart.enabled = false" >> src/main/resources/application.properties
+        echo "spring.devtools.livereload.enabled = false" >> src/main/resources/application.properties
+        
+        echo "logging.level.web = DEBUG" >> src/main/resources/application.properties
+        echo "logging.level.org.springframework.security.web.FilterChainProxy=DEBUG" >> src/main/resources/application.properties
+
     - name: Set up JDK 21 
       uses: actions/setup-java@v4
       with:
@@ -38,13 +49,7 @@ jobs:
         name: Package
         path: staging
       
-    - name: Get next version
-      uses: reecetech/version-increment@2023.9.3
-      id: version
-      with:
-        scheme: semver
-        increment: patch
-
+    
     - name: Create Release
       id: create_release
       uses: softprops/action-gh-release@v2
