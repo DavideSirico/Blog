@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BlogController {
 
 	private Posts posts;
+	private XML xml;
 
 	@Value("${xml.path:src/main/resources/xml/posts.xml}")
     private String path;
@@ -31,16 +32,15 @@ public class BlogController {
      */
 	@PostConstruct
 	public void init() {
-		posts = new Posts(path);
+		xml = new XML(path);
+		posts = xml.read();
 	}
 
 
 	@GetMapping("/")
 	public String index(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
 		model.addAttribute("posts", posts);
-		System.out.println("auth: " + (auth) + " - "  + (auth!= null && auth.isAuthenticated()));
 		boolean logged = auth != null && auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser");
 		model.addAttribute("logged", logged);
 		return "index";
@@ -59,36 +59,37 @@ public class BlogController {
 	}
 
 	@GetMapping("/not-found")
-	public String notFound(Model model) {
+	public String notFound() {
 		return "not-found";
 	}
 
 	// form to create a new post
 	@GetMapping("/new-post")
-	public String newPost(Model model) {
+	public String newPost() {
 		return "new-post";
 	}
 
 	@PostMapping("/new-post")
-	public String newPost(@RequestParam String title, @RequestParam String content, Model model) {
+	public String newPost(@RequestParam String title, @RequestParam String content) {
 		// get last post id
-		int last_id = posts.getLastId();
+		int last_id = xml.getLastId();
 		String id = Integer.toString(last_id + 1);
 		Post post = new Post(id, title, content, new ArrayList<Comment>(), 0, LocalDate.now());
 		posts.addPost(post);
+		xml.write(posts);
 		// redirect to the home page
 		return "redirect:/";
 	}
 	
 	@PostMapping("/post/{id}/add-comment")
-	public String addComment(@PathVariable String id, @RequestParam String content, @RequestParam String author, Model model) {
+	public String addComment(@PathVariable String id, @RequestParam String content, @RequestParam String author) {
 		Post post = posts.getPost(id);
 		if(post == null) {
 			return "redirect:/not-found";
 		}
 		Comment comment = new Comment(author, content, LocalDate.now());
 		posts.addComment(id, comment);
-		model.addAttribute("post", post);
+		xml.write(posts);
 		return "redirect:/post/" + id;
 	}
 
@@ -113,6 +114,7 @@ public class BlogController {
 	@PostMapping("/remove")
 	public String postMethodName(@RequestParam String id) {
 		posts.removePost(id);
+		xml.write(posts);
 		return "redirect:/";
 	}
 
@@ -127,7 +129,7 @@ public class BlogController {
 	}
 
 	@PostMapping("/post/{id}/edit-title")
-	public String editTitle(@PathVariable String id, @RequestParam String title, Model model) {
+	public String editTitle(@PathVariable String id, @RequestParam String title) {
 		Post post = posts.getPost(id);
 		if(post == null) {
 			return "redirect:/not-found";
@@ -137,12 +139,13 @@ public class BlogController {
 	}
 
 	@PostMapping("/post/{id}/edit-content")
-	public String editContent(@PathVariable String id, @RequestParam String content, Model model) {
+	public String editContent(@PathVariable String id, @RequestParam String content) {
 		Post post = posts.getPost(id);
 		if(post == null) {
 			return "redirect:/not-found";
 		}
 		posts.editContent(id, content);
+		xml.write(posts);
 		return "redirect:/edit/" + id;
 	}
 
@@ -164,7 +167,7 @@ public class BlogController {
 	}
 
 	@GetMapping("/error")
-	public String error(Model model) {
+	public String error() {
 		return "error";
 	}
 

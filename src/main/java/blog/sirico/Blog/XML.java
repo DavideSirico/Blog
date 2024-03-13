@@ -13,251 +13,115 @@ import java.time.*;
 public class XML {
 
     private String filename;
-    private Document doc;
 
     public XML(String filename) {
         this.filename = filename;
-        try {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            documentBuilderFactory.setIgnoringElementContentWhitespace(true);
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            if(new File(filename).exists()) {
-                // parse the xml file
-                this.doc = documentBuilder.parse(new File(filename));
-            } else {
-                // create a new xml file with the root element
-                this.doc = documentBuilder.newDocument();
-                Element root = doc.createElement("blog");
-                doc.appendChild(root);
-                write();
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Error parsing XML file");
-            e.printStackTrace();
-        }
     }
 
-    public ArrayList<Post> getPosts() {
-        // create an array list of posts empty
-        ArrayList<Post> posts = new ArrayList<Post>();
+    public void write(Posts posts) {
         try {
-            // get the root element
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.newDocument();
             Element root = doc.getDocumentElement();
-            // get all the post elements
-            NodeList postNodes = root.getElementsByTagName("post");
-
-            // for each post element
-            for(int i = 0; i < postNodes.getLength(); i++) {
-                if(postNodes.item(i).getNodeType() != Node.ELEMENT_NODE) continue;
-
-                Element postElement = (Element)postNodes.item(i);
-
-                String id = postElement.getAttribute("id");
-                String title = postElement.getElementsByTagName("title").item(0).getTextContent();
-                String content = postElement.getElementsByTagName("content").item(0).getTextContent();
-
-                NodeList commentNodes = postElement.getElementsByTagName("comment");
-                ArrayList<Comment> comments = new ArrayList<Comment>();
-                // for each comment element
-                for(int j = 0; j < commentNodes.getLength(); j++) {
-                    Element commentElement = (Element)commentNodes.item(j);
-                    String author = commentElement.getElementsByTagName("author").item(0).getTextContent();
-                    String comment = commentElement.getElementsByTagName("content").item(0).getTextContent();
-                    String dateStr = commentElement.getElementsByTagName("date").item(0).getTextContent();
-                    LocalDate date = LocalDate.parse(dateStr);
-                    
-                    comments.add(new Comment(author, comment, date));
+            
+            for (Post post : posts) {
+                Element postElement = doc.createElement("post");
+                postElement.setAttribute("id", post.getId());
+                Element title = doc.createElement("title");
+                title.appendChild(doc.createTextNode(post.getTitle()));
+                postElement.appendChild(title);
+                Element content = doc.createElement("content");
+                content.appendChild(doc.createTextNode(post.getContent()));
+                postElement.appendChild(content);
+                Element date = doc.createElement("date");
+                date.appendChild(doc.createTextNode(post.getDate().toString()));
+                postElement.appendChild(date);
+                Element views = doc.createElement("views");
+                views.appendChild(doc.createTextNode(Integer.toString(post.getViews())));
+                postElement.appendChild(views);
+                Element comments = doc.createElement("comments");
+                for (Comment comment : post.getComments()) {
+                    Element commentElement = doc.createElement("comment");
+                    commentElement.setAttribute("author", comment.getAuthor());
+                    commentElement.appendChild(doc.createTextNode(comment.getContent()));
+                    comments.appendChild(commentElement);
                 }
-
-                int views = Integer.parseInt(postElement.getElementsByTagName("views").item(0).getTextContent());
-                String dateStr = postElement.getElementsByTagName("date").item(0).getTextContent();
-                LocalDate date = LocalDate.parse(dateStr);
-                posts.add(new Post(id, title, content, comments, views, date));
+                postElement.appendChild(comments);
+                root.appendChild(postElement);
             }
-        } catch (Exception e) {
-            System.out.println("Error getting the posts from the XML doc.");
-            e.printStackTrace();
-        }
-        return posts;
-    }
-
-    // write the document on the file
-    private void write() {
-        try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File(filename));
             transformer.transform(source, result);
         } catch (Exception e) {
-            System.out.println("Error writing the post.xml file");
             e.printStackTrace();
         }
-    }
-
-    public void addPost(Post post) {
+    } 
+    public Posts read() {
+        Posts posts = new Posts();
         try {
-            // get the root element
-            Element root = doc.getDocumentElement();
-            // create a new post element
-            Element postElement = doc.createElement("post");
-            postElement.setAttribute("id", post.getId());
-            // create a title element
-            Element titleElement = doc.createElement("title");
-            titleElement.appendChild(doc.createTextNode(post.getTitle()));
-            postElement.appendChild(titleElement);
-            // create a content element
-            Element contentElement = doc.createElement("content");
-            contentElement.appendChild(doc.createTextNode(post.getContent()));
-            postElement.appendChild(contentElement);
-            // create a comment element
-            for (Comment comment : post.getComments()) {
-                Element commentElement = doc.createElement("comment");
-                Element authorElement = doc.createElement("author");
-                authorElement.appendChild(doc.createTextNode(comment.getAuthor()));
-                commentElement.appendChild(authorElement);
-                Element commentContentElement = doc.createElement("content");
-                commentContentElement.appendChild(doc.createTextNode(comment.getContent()));
-                commentElement.appendChild(commentContentElement);
-                Element dateElement = doc.createElement("date");
-                dateElement.appendChild(doc.createTextNode(comment.getDate().toString()));
-                commentElement.appendChild(dateElement);
-                postElement.appendChild(commentElement);
-            }
-            // create a views element
-            Element viewsElement = doc.createElement("views");
-            viewsElement.appendChild(doc.createTextNode(Integer.toString(post.getViews())));
-            postElement.appendChild(viewsElement);
-            // create a date element
-            Element dateElement = doc.createElement("date");
-            dateElement.appendChild(doc.createTextNode(post.getDate().toString()));
-            postElement.appendChild(dateElement);
-            // append the post element to the root element
-            root.appendChild(postElement);
-            write();
-        } catch (Exception e) {
-            System.out.println("Error adding a post to the post.xml file");
-            e.printStackTrace();
-        }
-    }
-    public void addView(Post post) {
-        try {
-            Element postElement = findPost(post.getId());
-            if (postElement != null) {
-                int views = post.getViews();
-                views++;
-                postElement.getElementsByTagName("views").item(0).setTextContent(Integer.toString(views));
-                write();
-            }
-        } catch (Exception e) {
-            System.out.println("Error updating the views of the post " + post.getId() + " in the post.xml file");
-            e.printStackTrace();
-        }
-    }
+            File file = new File(filename);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+            doc.getDocumentElement().normalize();
 
-    public void addView(String id) {
-        try {
-            Element postElement = findPost(id);
-            if (postElement != null) {
-                int views = Integer.parseInt(postElement.getElementsByTagName("views").item(0).getTextContent());
-                views++;
-                postElement.getElementsByTagName("views").item(0).setTextContent(Integer.toString(views));
-                write();
-            }
-        } catch (Exception e) {
-            System.out.println("Error updating the views of the post " + id + " in the post.xml file");
-            e.printStackTrace();
-        }
-    }
-
-    public void addComment(String id, Comment comment) {
-        try {
-            Element postElement = findPost(id);
-            if (postElement != null) {
-                Element commentElement = doc.createElement("comment");
-                Element authorElement = doc.createElement("author");
-                authorElement.appendChild(doc.createTextNode(comment.getAuthor()));
-                commentElement.appendChild(authorElement);
-                Element commentContentElement = doc.createElement("content");
-                commentContentElement.appendChild(doc.createTextNode(comment.getContent()));
-                commentElement.appendChild(commentContentElement);
-                Element dateElement = doc.createElement("date");
-                dateElement.appendChild(doc.createTextNode(comment.getDate().toString()));
-                commentElement.appendChild(dateElement);
-                postElement.appendChild(commentElement);
-                write();
-            }
-        } catch (Exception e) {
-            System.out.println("Error adding a comment to the post " + id + " in the post.xml file");
-            e.printStackTrace();
-        }
-    }
-
-    public void removePost(String id) {
-        try {
-            Element postElement = findPost(id);
-            if (postElement != null) {
-                postElement.getParentNode().removeChild(postElement);
-                write();
-            }
-        } catch (Exception e) {
-            System.out.println("Error removing a post from the post.xml file");
-            e.printStackTrace();
-        }
-    }
-
-
-    private Element findPost(String id) {
-        NodeList nList = doc.getElementsByTagName("post");
-        for (int i = 0; i < nList.getLength(); i++) {
-            Node nNode = nList.item(i);
-            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                
-                Element eElement = (Element) nNode;
-                if (eElement.getAttribute("id").equals(id)) {
-                    return eElement;
+            NodeList postNodes = doc.getElementsByTagName("post");
+            for (int i = 0; i < postNodes.getLength(); i++) {
+                Node postNode = postNodes.item(i);
+                if (postNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element postElement = (Element) postNode;
+                    String id = postElement.getAttribute("id");
+                    String title = postElement.getElementsByTagName("title").item(0).getTextContent();
+                    String content = postElement.getElementsByTagName("content").item(0).getTextContent();
+                    LocalDate date = LocalDate.parse(postElement.getElementsByTagName("date").item(0).getTextContent());
+                    int views = Integer.parseInt(postElement.getElementsByTagName("views").item(0).getTextContent());
+                    NodeList commentNodes = postElement.getElementsByTagName("comment");
+                    ArrayList<Comment> comments = new ArrayList<>();
+                    for (int j = 0; j < commentNodes.getLength(); j++) {
+                        Node commentNode = commentNodes.item(j);
+                        if (commentNode.getNodeType() == Node.ELEMENT_NODE) {
+                            Element commentElement = (Element) commentNode;
+                            String author = commentElement.getAttribute("author");
+                            String comment = commentElement.getTextContent();
+                            comments.add(new Comment(author, comment, LocalDate.now()));
+                        }
+                    }
+                    posts.addPost(new Post(id, title, content, comments, views, date));
                 }
             }
-        }
-        return null;
-    }
-    
-    public void editTitle(String id, String title) {
-        try {
-            Element postElement = findPost(id);
-            if (postElement != null) {
-                postElement.getElementsByTagName("title").item(0).setTextContent(title);
-                write();
-            }
         } catch (Exception e) {
-            System.out.println("Error editing the title in the post.xml file");
             e.printStackTrace();
         }
-    }
-
-    public void editContent(String id, String content) {
-        try {
-            Element postElement = findPost(id);
-            if (postElement != null) {
-                postElement.getElementsByTagName("content").item(0).setTextContent(content);
-                write();
-            }
-        } catch (Exception e) {
-            System.out.println("Error editing the content in the post.xml file");
-            e.printStackTrace();
-        }
+        return posts;
     }
 
     public int getLastId() {
-        NodeList nList = doc.getElementsByTagName("post");
-        // get the last post element
-        // if there are no posts in the file
-        if(nList.getLength() > 0) {
-            Element eElement = (Element)nList.item(nList.getLength() - 1);
-            return Integer.parseInt(eElement.getAttribute("id"));
+        int last_id = 0;
+        try {
+            File file = new File(filename);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+            doc.getDocumentElement().normalize();
+            NodeList postNodes = doc.getElementsByTagName("post");
+            for (int i = 0; i < postNodes.getLength(); i++) {
+                Node postNode = postNodes.item(i);
+                if (postNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element postElement = (Element) postNode;
+                    int id = Integer.parseInt(postElement.getAttribute("id"));
+                    if (id > last_id) {
+                        last_id = id;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        // if there are no posts in the file it returns -1 because the first is post starts at 0 an not at 1
-        return -1;
+        return last_id;
     }
 }
+
+    

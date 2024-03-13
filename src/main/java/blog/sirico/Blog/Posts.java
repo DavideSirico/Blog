@@ -7,18 +7,14 @@ import java.util.*;
 // I've implemented the Iterable interface so that I can use the for-each loop to iterate over the posts
 public class Posts implements Iterable<Post> {
     private List<Post> posts;
-    private XML xml;
 
-    public Posts(String filename){
-        xml = new XML(filename);
-        // I get the post from the xml file
-        posts = xml.getPosts();
+    public Posts() {
+        posts = new ArrayList<>();
     }
     
     public void addPost(Post post){
         // I add the post to the list of posts and to the xml file
         posts.add(post);
-        xml.addPost(post);
     }
 
     public List<Post> getPosts(){
@@ -38,7 +34,6 @@ public class Posts implements Iterable<Post> {
         Post post = getPost(id);
         if(post != null){
             post.addView();
-            xml.addView(id);
         }
     }
 
@@ -46,7 +41,6 @@ public class Posts implements Iterable<Post> {
         Post post = getPost(id);
         if(post != null){
             post.addComment(comment);
-            xml.addComment(id, comment);
         }
     }
 
@@ -61,7 +55,6 @@ public class Posts implements Iterable<Post> {
         Post post = getPost(id);
         if(post != null){
             posts.remove(post);
-            xml.removePost(id);
         }
     }
 
@@ -69,7 +62,6 @@ public class Posts implements Iterable<Post> {
         Post post = getPost(id);
         if(post != null){
             post.setTitle(title);
-            xml.editTitle(id, title);
         }
     }
 
@@ -77,11 +69,6 @@ public class Posts implements Iterable<Post> {
         Post post = getPost(id);
         if(post != null){
             post.setContent(content);
-            xml.editContent(id, content);
         }
-    }
-
-    public int getLastId() {
-        return xml.getLastId();
     }
 }

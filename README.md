@@ -40,13 +40,7 @@ TODO:
 - [X] Pagina per modificare i post
 - [X] !Pagina per aggiungere i post (solo CSS)
 - [X] Implementare la ricerca
-- [ ] !Link che porta alla home
-
-Determining workspace structure
-
-Deciding which workspace information to collect
-
-Gathering workspace info
+- [X] !Link che porta alla home
 
 # Blog Application
 
