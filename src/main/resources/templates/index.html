@@ -18,7 +18,7 @@
     <div class="flex align-center">
       <div class="flex-right px-2">
         <div id="mySearchbar" class="searchbar">
-          <form action="/search" method="get">
+          <form th:action="@{/search}" method="get">
             <input type="text" placeholder="Search.." name="q">
           </form>
         </div>

@@ -22,7 +22,6 @@ public class WebSecurityConfig {
 				.requestMatchers(HttpMethod.POST, "/new-post").hasRole("ADMIN")
 				.requestMatchers(HttpMethod.POST, "/edit/*", "/remove/*", "/post/*/edit-title", "/post/*/edit-content").hasRole("ADMIN")
                 .requestMatchers("/new-post", "/edit/*", "/remove/*", "/post/*/edit-title", "/post/*/edit-content").hasRole("ADMIN")
-				.requestMatchers(HttpMethod.GET, "/error").permitAll()
 
 				.anyRequest().permitAll()
 			)

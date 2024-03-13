@@ -47,7 +47,7 @@
 
         <!-- new comment form -->
         <p>Tell us your opinion!</p>
-        <form th:attr="action='/post/' + ${post.getId()} + '/add-comment'" method="POST">
+        <form method="post" th:action="@{/post/{id}/add-comment(id=${post.id})}">
             <label for="content">Commento</label> <br>
             <textarea id="content" name="content"></textarea>
             <br>

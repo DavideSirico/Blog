@@ -11,8 +11,7 @@
     <!-- title -->
     <div class="container-post-title">
         <h1 class="post-title" th:text="${post.title}"></h1>
-        <!-- idk why the Thymeleaf needs this to work -->
-        <form th:action="'/post/' + ${post.id} + '/edit-title'" method="post">
+        <form th:action="@{/post/{id}/edit-title(id=${post.id})}" method="post">
             <input class="post-title-input" type="hidden" name="title">
             <input type="image" th:src="@{/icon/edit.svg}" th:onclick="edit_title(this)" class="edit-btn"></input>
         </form>
@@ -29,7 +28,7 @@
     <div class="container-content">
         <!-- content -->
         <p th:utext="${#strings.replace(post.getContent(), '&#13;', '<br/>')}"></p>
-        <form th:action="'/post/' + ${post.id} + '/edit-content'" method="post">
+        <form th:action="@{/post/{id}/edit-content(id=${post.id})}" method="post">
             <textarea style="display: none" class="post-content-input" name="content"></textarea>
             <input type="image" th:src="@{/icon/edit.svg}" th:onclick="edit_content(this)" class="edit-btn"></input>
         </form>
