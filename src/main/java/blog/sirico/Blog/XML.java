@@ -24,7 +24,11 @@ public class XML {
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();
             Element root = doc.getDocumentElement();
-            
+            if (root == null) {
+                root = doc.createElement("blog");
+                doc.appendChild(root);
+            }
+
             for (Post post : posts) {
                 Element postElement = doc.createElement("post");
                 postElement.setAttribute("id", post.getId());
