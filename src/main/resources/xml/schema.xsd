@@ -8,7 +8,15 @@
                         <xs:sequence>
                             <xs:element name="title" type="xs:string" />
                             <xs:element name="content" type="xs:string" />
-                            <xs:element name="comment">
+                            <xs:element name="views">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:integer">
+                                    <xs:minInclusive value="0" />
+                                </xs:restriction>
+                            </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="date" type="xs:date" />
+                            <xs:element name="comment" minOccurs="0" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="author" type="xs:string" />
@@ -17,15 +25,11 @@
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="views" type="xs:integer" />
-                            <xs:element name="date" type="xs:date" />
                         </xs:sequence>
-                        <!-- set the attribute id to not go under 0 -->
                         <xs:attribute name="id" use="required">
                             <xs:simpleType>
                                 <xs:restriction base="xs:integer">
                                     <xs:minInclusive value="0" />
-
                                 </xs:restriction>
                             </xs:simpleType>
                         </xs:attribute>
