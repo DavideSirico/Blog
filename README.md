@@ -72,7 +72,6 @@ The XML file is structured as follows:
     <post id="0">
         <title>Title</title>
         <content>Content</content>
-        <author>Author</author>
         <date>2021-12-12</date>
         <comment>
             <author>Author</author>
