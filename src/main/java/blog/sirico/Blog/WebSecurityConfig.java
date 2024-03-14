@@ -45,10 +45,10 @@ public class WebSecurityConfig {
 		@SuppressWarnings("deprecation")
 		UserDetails user =
 			 User.withDefaultPasswordEncoder()
-				.username("user")
-				.password("password")
+				.username("Surry")
+				.password("SurryCraft")  
 				.roles("ADMIN")
-				.build();
+				.build(); //security skill issue
 
 		return new InMemoryUserDetailsManager(user);
 	}
