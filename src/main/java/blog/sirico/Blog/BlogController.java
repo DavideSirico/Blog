@@ -16,14 +16,11 @@ import java.time.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
 @Controller
 public class BlogController {
 
 	private Posts posts;
 	private XML xml;
-
 	@Value("${xml.path:src/main/resources/xml/posts.xml}")
     private String path;
 	/**
@@ -35,7 +32,6 @@ public class BlogController {
 		xml = new XML(path);
 		posts = xml.read();
 	}
-
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -54,6 +50,7 @@ public class BlogController {
 		}
 		// increment the number of views of the post(id)
 		posts.addView(id);
+		xml.write(posts);
 		model.addAttribute("post", post);
 		return "post";
 	}
@@ -110,7 +107,6 @@ public class BlogController {
 		return "redirect:/";
 	}
 
-
 	@PostMapping("/remove")
 	public String postMethodName(@RequestParam String id) {
 		posts.removePost(id);
@@ -135,6 +131,7 @@ public class BlogController {
 			return "redirect:/not-found";
 		}
 		posts.editTitle(id, title);
+		xml.write(posts);
 		return "redirect:/edit/" + id;
 	}
 

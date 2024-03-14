@@ -3,7 +3,7 @@
     <xs:element name="blog">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="post" maxOccurs="unbounded">
+                <xs:element name="post" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="title" type="xs:string" />

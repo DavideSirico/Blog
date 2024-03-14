@@ -1,6 +1,7 @@
 package blog.sirico.Blog;
 
 import java.util.*;
+import java.util.concurrent.Semaphore;
 import java.io.*;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
@@ -13,13 +14,20 @@ import java.time.*;
 public class XML {
 
     private String filename;
-
+    private Semaphore semaphore;
     public XML(String filename) {
         this.filename = filename;
+        this.semaphore = new Semaphore(1);
     }
 
-    public void write(Posts posts) {
+    public XML(String filename, Semaphore semaphore) {
+        this.filename = filename;
+        this.semaphore = semaphore;
+    }
+
+    public  void write(Posts posts) {
         try {
+            semaphore.acquire();
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();
@@ -61,11 +69,14 @@ public class XML {
             transformer.transform(source, result);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            semaphore.release();
         }
     } 
     public Posts read() {
         Posts posts = new Posts();
         try {
+            semaphore.acquire();
             File file = new File(filename);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -98,6 +109,8 @@ public class XML {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            semaphore.release();
         }
         return posts;
     }
@@ -105,6 +118,7 @@ public class XML {
     public int getLastId() {
         int last_id = 0;
         try {
+            semaphore.acquire();
             File file = new File(filename);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -123,6 +137,8 @@ public class XML {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            semaphore.release();
         }
         return last_id;
     }
