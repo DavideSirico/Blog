@@ -6,40 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog Homepage</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body>
-  <div class="container-title flex space-between align-center">
+  <div class="container-title flex align-center space-between">
     <div>
       <a href="/">
         <h1 class="blog-title">Sirico's Blog</h1>
       </a>
     </div>
-    <div class="flex align-center">
-      <div class="flex-right px-2">
+    <div class="flex align-center" style="gap: 10px;">
+      <div class="flex align-center" style="gap: 5px; position: relative;">
         <div id="mySearchbar" class="searchbar">
-          <form th:action="@{/search}" method="get">
-            <input type="text" placeholder="Search.." name="q">
-          </form>
-        </div>
-        <button class="dropbtn" onclick="searchbar()">
-          <img th:src="@{/icon/search.svg}" alt="search" />
-        </button>
-
-      </div>
-      <div class="flex-right px-2">
-        <div>
-          <button onclick="dropDownMenu()" class="dropbtn">
-            <img th:src="@{/icon/avatar.svg}" alt="avatar" />
-
-          </button>
-          <!-- If the user is not logged -->
-          <div id="myDropdown" class="dropdown-content">
-            <a th:if="${logged}" th:href="@{/new-post}">Create new post</a>
-            <a th:if="${!logged}" th:href="@{/login}" th:text="Login">Login</a>
-            <form th:action="@{/logout}" method="post">
-              <input class="logout" th:if="${logged}" type="submit" value="Logout"> 
+            <form th:action="@{/search}" method="get">
+              <input type="text" placeholder="Search.." name="q">
             </form>
+          </div>
+          <button class="dropbtn" onclick="searchbar()">
+            <img th:src="@{/icon/search.svg}" alt="search" />
+          </button>
+
+        </div>
+        <div class="flex-right px-2">
+          <div>
+            <button onclick="dropDownMenu()" class="dropbtn">
+              <img th:src="@{/icon/avatar.svg}" alt="avatar" />
+
+            </button>
+            <!-- If the user is not logged -->
+            <div id="myDropdown" class="dropdown-content">
+              <a th:if="${logged}" th:href="@{/new-post}">Create new post</a>
+              <a th:if="${!logged}" th:href="@{/login}" th:text="Login">Login</a>
+              <form th:action="@{/logout}" method="post">
+                <input class="logout" th:if="${logged}" type="submit" value="Logout"> 
+              </form>
+            </div>
           </div>
         </div>
       </div>
